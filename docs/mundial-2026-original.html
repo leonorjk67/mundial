@@ -1,0 +1,2765 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mundial 2026 · Resultados, Tablas y Estadísticas</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0c1210;
+  --surface: #121a16;
+  --card: #162019;
+  --card2: #1c2a22;
+  --line: rgba(255,255,255,0.09);
+  --text: #f0f4fa;
+  --muted: #8b9bb4;
+  --green: #00e676;
+  --green2: #00c853;
+  --gold: #ffc107;
+  --gold2: #ffb300;
+  --blue: #4fc3f7;
+  --red: #ff5252;
+  --radius: 14px;
+  --shadow: 0 12px 40px rgba(0,0,0,0.45);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  color: var(--text);
+  min-height: 100vh;
+  line-height: 1.5;
+  margin: 0; padding: 0;
+  overflow-x: hidden;
+  position: relative;
+  background: linear-gradient(-45deg, #0d1b2a, #1b263b, #0f4c81, #1a4314, #2a0845);
+  background-size: 400% 400%;
+  animation: dynamicGradient 18s ease infinite;
+}
+body::before { content: none; display: none; }
+@keyframes bgShift {
+  0% {
+    background:
+      radial-gradient(ellipse 90% 55% at 20% -5%, rgba(0,230,118,0.22), transparent),
+      radial-gradient(ellipse 70% 45% at 85% 8%, rgba(255,193,7,0.08), transparent),
+      radial-gradient(ellipse 55% 40% at 50% 100%, rgba(0,80,40,0.12), transparent);
+    filter: brightness(1.05);
+  }
+  50% {
+    background:
+      radial-gradient(ellipse 90% 55% at 30% 0%, rgba(0,180,90,0.14), transparent),
+      radial-gradient(ellipse 70% 45% at 75% 15%, rgba(255,193,7,0.12), transparent),
+      radial-gradient(ellipse 55% 40% at 40% 100%, rgba(0,60,30,0.2), transparent);
+    filter: brightness(0.95);
+  }
+  100% {
+    background:
+      radial-gradient(ellipse 90% 55% at 15% 5%, rgba(0,120,60,0.2), transparent),
+      radial-gradient(ellipse 70% 45% at 90% 5%, rgba(255,193,7,0.06), transparent),
+      radial-gradient(ellipse 55% 40% at 60% 100%, rgba(0,40,20,0.25), transparent);
+    filter: brightness(0.88);
+  }
+}
+.nav {
+  position: sticky; top: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0.75rem 1.25rem;
+  background: rgba(12,18,16,0.94);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--line);
+}
+.nav-brand {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.3rem; letter-spacing: 2px; color: var(--gold);
+  white-space: nowrap;
+}
+.nav-links { display: flex; gap: 0.15rem; list-style: none; flex-wrap: wrap; justify-content: flex-end; }
+.nav-links a {
+  color: var(--muted); text-decoration: none;
+  padding: 0.4rem 0.7rem; border-radius: 8px;
+  font-size: 0.82rem; font-weight: 500; transition: 0.2s;
+}
+.nav-links a:hover, .nav-links a.active {
+  color: var(--text); background: rgba(0,200,83,0.12);
+}
+.nav-toggle { display: none; background: none; border: none; color: var(--text); font-size: 1.4rem; cursor: pointer; }
+
+.panel { display: none; animation: fadeIn 0.35s ease; position: relative; z-index: 1; }
+.panel.on { display: block; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero {
+  text-align: center;
+  padding: 2.2rem 1.5rem 1.2rem;
+  max-width: 900px; margin: 0 auto;
+}
+.hero-trophy { font-size: 3.2rem; margin-bottom: 0.25rem; filter: drop-shadow(0 8px 24px rgba(255,193,7,0.3)); }
+.hero h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(3rem, 11vw, 6rem);
+  letter-spacing: 0.18em;
+  background: linear-gradient(105deg, #fff8e1 0%, #ffc107 25%, #ff8f00 50%, #ffc107 75%, #fff8e1 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  animation: shine 4s linear infinite;
+  filter: drop-shadow(0 4px 24px rgba(255,193,7,0.35));
+}
+@keyframes shine { to { background-position: 200% center; } }
+.hero h1 span { display: inline-block; animation: letterPop 0.6s ease backwards; }
+.hero h1 span:nth-child(1){animation-delay:.05s}
+.hero h1 span:nth-child(2){animation-delay:.1s}
+.hero h1 span:nth-child(3){animation-delay:.15s}
+.hero h1 span:nth-child(4){animation-delay:.2s}
+.hero h1 span:nth-child(5){animation-delay:.25s}
+.hero h1 span:nth-child(6){animation-delay:.3s}
+.hero h1 span:nth-child(7){animation-delay:.35s}
+@keyframes letterPop {
+  from { opacity: 0; transform: translateY(20px) scale(0.8); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.hero-year {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(3rem, 10vw, 5rem);
+  letter-spacing: 0.28em; color: var(--gold);
+  margin: -0.05rem 0 0.4rem;
+  text-shadow: 0 0 48px rgba(255,193,7,0.45);
+  line-height: 1;
+}
+.hero p { color: var(--muted); font-size: 1rem; margin: 0.4rem 0 1rem; }
+.hero-flags {
+  display: flex; gap: 0.6rem; justify-content: center; align-items: center;
+  margin-bottom: 1.4rem;
+  font-size: 1rem; font-weight: 700; letter-spacing: 0.2em;
+  color: var(--muted);
+}
+.hero-flags span { font-size: 1rem; line-height: 1; }
+
+.summary-card {
+  background: linear-gradient(145deg, var(--card), var(--card2));
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.15rem 1.4rem;
+  max-width: 520px; margin: 0 auto;
+  text-align: left; box-shadow: var(--shadow);
+}
+.summary-card h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.2rem; letter-spacing: 1px; color: var(--gold);
+  margin-bottom: 0.7rem; text-align: center;
+}
+.summary-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0.38rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.9rem;
+}
+.summary-row:last-child { border-bottom: none; }
+.summary-row .label { color: var(--muted); }
+.summary-row .value { font-weight: 600; }
+.summary-row .value.champ { color: var(--gold); }
+
+.stats {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 0.7rem; max-width: 800px; margin: 1.5rem auto 2rem; padding: 0 1.5rem;
+}
+.stat {
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: var(--radius); padding: 1rem; text-align: center;
+}
+.stat strong {
+  display: block; font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.9rem; color: var(--gold); line-height: 1;
+}
+.stat span { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.4px; }
+
+section {
+  max-width: 1100px; margin: 0 auto;
+  padding: 2rem 1.25rem;
+}
+.sec-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(1.7rem, 4vw, 2.3rem);
+  letter-spacing: 2px; color: var(--gold);
+  margin-bottom: 0.3rem;
+}
+.sec-desc { color: var(--muted); margin-bottom: 1.3rem; font-size: 0.92rem; }
+
+.pills { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-bottom: 1.15rem; }
+.pill {
+  background: var(--card); border: 1px solid var(--line);
+  color: var(--text); padding: 0.5rem 1rem;
+  border-radius: 999px; font-family: inherit;
+  font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: 0.2s;
+}
+.pill:hover { border-color: var(--green); background: rgba(0,200,83,0.1); }
+.pill.on {
+  background: linear-gradient(135deg, var(--green), var(--green2));
+  border-color: transparent; color: #fff;
+  box-shadow: 0 4px 14px rgba(0,200,83,0.3);
+}
+
+.table-wrap {
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 1.4rem;
+  overflow-x: auto;
+}
+.table-wrap h3 {
+  padding: 0.8rem 1rem;
+  background: linear-gradient(90deg, rgba(0,200,83,0.15), rgba(255,193,7,0.08));
+  font-size: 0.98rem; color: var(--gold); border-bottom: 1px solid var(--line);
+}
+table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+th {
+  text-align: left; padding: 0.5rem 0.65rem;
+  color: var(--muted); font-weight: 500; font-size: 0.68rem;
+  text-transform: uppercase; letter-spacing: 0.35px;
+  border-bottom: 1px solid var(--line);
+}
+th.n, td.n { text-align: center; }
+td { padding: 0.55rem 0.65rem; border-bottom: 1px solid rgba(255,255,255,0.04); }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255,255,255,0.03); }
+.pos { font-weight: 700; width: 28px; text-align: center; }
+.pos.ok { color: var(--green); }
+.pos.third { color: var(--blue); }
+.team { font-weight: 600; white-space: nowrap; }
+.pts { font-weight: 700; color: var(--gold); text-align: center; }
+.code {
+  display: inline-block;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 0.85em;
+  letter-spacing: 0.5px;
+  color: var(--gold);
+  background: rgba(255,193,7,0.12);
+  border: 1px solid rgba(255,193,7,0.25);
+  padding: 0.08rem 0.35rem;
+  border-radius: 5px;
+  margin-right: 0.3rem;
+  vertical-align: middle;
+  line-height: 1.2;
+}
+
+.matches {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 0.85rem;
+}
+.match {
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: var(--radius); padding: 0.95rem;
+  cursor: pointer; transition: 0.2s;
+}
+.match:hover {
+  border-color: rgba(0,200,83,0.35);
+  transform: translateY(-2px); box-shadow: var(--shadow);
+}
+.match-top {
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 0.72rem; color: var(--muted); margin-bottom: 0.55rem;
+}
+.badge {
+  background: rgba(0,200,83,0.15); color: var(--green);
+  padding: 0.12rem 0.45rem; border-radius: 6px; font-weight: 600; font-size: 0.68rem;
+}
+.badge.ko { background: rgba(255,193,7,0.15); color: var(--gold); }
+.match-mid {
+  display: grid; grid-template-columns: 1fr auto 1fr;
+  align-items: center; gap: 0.35rem; margin-bottom: 0.45rem;
+}
+.match-mid .t { font-weight: 600; font-size: 0.85rem; text-align: center; line-height: 1.3; }
+.match-mid .s {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.4rem; color: var(--gold); letter-spacing: 1px;
+  min-width: 68px; text-align: center;
+}
+.match-bot {
+  display: flex; justify-content: space-between;
+  font-size: 0.72rem; color: var(--muted);
+}
+.match-goals {
+  max-height: 0; overflow: hidden; transition: 0.3s; margin-top: 0;
+}
+.match.open .match-goals {
+  max-height: 280px; margin-top: 0.7rem;
+  padding-top: 0.7rem; border-top: 1px solid var(--line);
+}
+.goals-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; font-size: 0.78rem; }
+.goals-grid h4 { color: var(--gold); font-size: 0.72rem; margin-bottom: 0.2rem; }
+.goals-grid div { color: var(--muted); }
+
+.block { margin-bottom: 1.8rem; }
+.block-title {
+  font-size: 0.98rem; font-weight: 700; color: var(--text);
+  margin-bottom: 0.7rem; padding-left: 0.55rem;
+  border-left: 3px solid var(--green);
+}
+
+
+/* BRACKET IMPROVED */
+.bracket-wrap {
+  overflow-x: auto;
+  padding: 0.5rem 0 1.5rem;
+  -webkit-overflow-scrolling: touch;
+}
+.bracket {
+  display: flex;
+  gap: 0;
+  min-width: 1100px;
+  padding: 0.5rem 0.25rem;
+  align-items: stretch;
+}
+.bracket-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 0.45rem;
+  min-width: 175px;
+  position: relative;
+  padding: 0 0.4rem;
+}
+.bracket-col h4 {
+  text-align: center;
+  font-size: 0.72rem;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  padding: 0.35rem 0;
+  z-index: 2;
+}
+.b-match {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 0.5rem 0.6rem;
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: 0.2s;
+  position: relative;
+}
+.b-match:hover {
+  border-color: var(--green);
+  transform: scale(1.02);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  z-index: 3;
+}
+.b-match .bt {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0.22rem 0;
+  gap: 0.35rem;
+}
+.b-match .bt.win {
+  font-weight: 700;
+  color: var(--green);
+}
+.b-match .bt.lose {
+  color: var(--muted);
+  opacity: 0.75;
+}
+.b-match .sc {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.05rem;
+  color: var(--gold);
+  min-width: 1.2rem;
+  text-align: right;
+}
+.b-final {
+  border: 2px solid rgba(255,193,7,0.55);
+  background: linear-gradient(160deg, var(--card), rgba(255,193,7,0.12));
+  box-shadow: 0 0 24px rgba(255,193,7,0.15);
+}
+.b-champ-badge {
+  text-align: center;
+  font-size: 0.65rem;
+  color: var(--gold);
+  font-weight: 700;
+  margin-top: 0.25rem;
+  letter-spacing: 0.5px;
+}
+.bracket-col.col-final {
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+/* STATS PAGE */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+}
+.rank-list {
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: var(--radius); overflow: hidden;
+}
+.rank-list h3 {
+  padding: 0.8rem 1rem;
+  background: linear-gradient(90deg, rgba(0,200,83,0.12), rgba(255,193,7,0.06));
+  font-size: 0.95rem; color: var(--gold); border-bottom: 1px solid var(--line);
+}
+.rank-item {
+  display: flex; align-items: center; gap: 0.7rem;
+  padding: 0.55rem 1rem;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  font-size: 0.88rem;
+}
+.rank-item:last-child { border-bottom: none; }
+.rank-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.15rem; color: var(--muted); width: 24px; text-align: center;
+}
+.rank-num.top { color: var(--gold); }
+.rank-name { flex: 1; font-weight: 600; }
+.rank-val { font-weight: 700; color: var(--gold); font-family: 'Bebas Neue', sans-serif; font-size: 1.15rem; }
+
+/* TEAMS */
+.teams-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 0.9rem;
+}
+.team-card {
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: var(--radius); padding: 1rem;
+  cursor: pointer; transition: 0.2s;
+}
+.team-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255,193,7,0.3);
+  box-shadow: var(--shadow);
+}
+.team-card-top {
+  display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;
+}
+.team-flag {
+  font-size: 2.2rem; line-height: 1;
+}
+.team-card h3 { font-size: 1.05rem; }
+.team-stage {
+  font-size: 0.78rem; color: var(--gold); font-weight: 600;
+}
+.team-meta { font-size: 0.8rem; color: var(--muted); margin-top: 0.3rem; }
+.team-detail {
+  max-height: 0; overflow: hidden; transition: 0.35s;
+}
+.team-card.open .team-detail {
+  max-height: 400px; margin-top: 0.75rem;
+  padding-top: 0.75rem; border-top: 1px solid var(--line);
+}
+.team-detail p { font-size: 0.82rem; color: var(--muted); margin-bottom: 0.4rem; }
+.team-detail strong { color: var(--text); }
+.search-box {
+  width: 100%; max-width: 360px;
+  padding: 0.7rem 1rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--text);
+  font-family: inherit; font-size: 0.9rem;
+  margin-bottom: 1.2rem;
+  outline: none;
+}
+.search-box:focus { border-color: var(--green); }
+
+/* STARS */
+.stars-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+}
+.star-card {
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: var(--radius); padding: 1.1rem;
+  transition: 0.25s; cursor: pointer; overflow: hidden;
+}
+.star-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255,193,7,0.35);
+  box-shadow: var(--shadow);
+}
+.star-card.highlight {
+  border-color: rgba(0,200,83,0.25);
+  background: linear-gradient(160deg, var(--card), rgba(0,200,83,0.06));
+  cursor: default;
+}
+.star-top { display: flex; align-items: center; gap: 0.85rem; margin-bottom: 0.45rem; }
+.star-photo {
+  width: 60px; height: 60px; border-radius: 50%;
+  border: 2px solid rgba(255,193,7,0.4);
+  background: var(--card2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.7rem; flex-shrink: 0;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+}
+.star-info { flex: 1; min-width: 0; }
+.star-card h3 { font-size: 1.02rem; margin-bottom: 0.12rem; }
+.star-team { font-size: 0.78rem; color: var(--gold); font-weight: 600; }
+.star-note { font-size: 0.82rem; color: var(--muted); line-height: 1.4; margin-top: 0.3rem; }
+.star-hint { font-size: 0.7rem; color: var(--muted); margin-top: 0.35rem; opacity: 0.7; }
+.star-detail {
+  /* legacy star-card; tiles use their own rules */
+}
+.star-card .star-detail {
+  max-height: 0; overflow: hidden; transition: max-height 0.35s ease, margin 0.35s ease;
+}
+.star-card.open .star-detail {
+  max-height: 220px; margin-top: 0.8rem;
+  padding-top: 0.7rem; border-top: 1px solid var(--line);
+}
+.star-stats {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 0.45rem; text-align: center;
+}
+.star-stat {
+  background: rgba(255,255,255,0.04); border-radius: 10px; padding: 0.5rem 0.25rem;
+}
+.star-stat strong {
+  display: block; font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.3rem; color: var(--gold); line-height: 1;
+}
+.star-stat span {
+  font-size: 0.65rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.3px;
+}
+
+.cities {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 0.85rem;
+}
+.city {
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: var(--radius); padding: 1rem;
+}
+.city h4 { font-size: 0.98rem; margin-bottom: 0.15rem; }
+.city .co { font-size: 0.78rem; color: var(--muted); margin-bottom: 0.6rem; }
+.city .w { display: flex; align-items: center; gap: 0.65rem; }
+.city .wi { font-size: 1.7rem; }
+.city .wt { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: var(--gold); }
+.city .wd { font-size: 0.78rem; color: var(--muted); }
+
+footer {
+  text-align: center; padding: 1.8rem 1.5rem;
+  border-top: 1px solid var(--line); color: var(--muted); font-size: 0.78rem;
+  position: relative; z-index: 1;
+}
+.empty { text-align: center; padding: 2rem; color: var(--muted); }
+
+@media (max-width: 800px) {
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  .nav-links {
+    display: none; position: absolute; top: 100%; left: 0; right: 0;
+    background: var(--bg); flex-direction: column; padding: 0.7rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-links.open { display: flex; }
+  .nav-toggle { display: block; }
+  .matches { grid-template-columns: 1fr; }
+}
+
+/* VENUES ENHANCED */
+.venue-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+}
+.venue-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: 0.25s;
+}
+.venue-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255,193,7,0.35);
+  box-shadow: var(--shadow);
+}
+.venue-head {
+  background: linear-gradient(135deg, rgba(61,126,255,0.2), rgba(255,193,7,0.1));
+  padding: 1rem 1.1rem;
+  border-bottom: 1px solid var(--line);
+}
+.venue-head h3 { font-size: 1.05rem; margin-bottom: 0.2rem; }
+.venue-head .real { font-size: 0.8rem; color: var(--gold); font-weight: 600; }
+.venue-head .co { font-size: 0.78rem; color: var(--muted); margin-top: 0.25rem; }
+.venue-body { padding: 1rem 1.1rem; }
+.venue-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+.venue-stat {
+  background: rgba(255,255,255,0.04);
+  border-radius: 10px;
+  padding: 0.5rem 0.6rem;
+  text-align: center;
+}
+.venue-stat strong {
+  display: block;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.15rem;
+  color: var(--gold);
+  line-height: 1.1;
+}
+.venue-stat span {
+  font-size: 0.65rem;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+.venue-note { font-size: 0.82rem; color: var(--muted); line-height: 1.45; }
+.venue-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.6rem; }
+.venue-tag {
+  font-size: 0.7rem;
+  background: rgba(0,200,83,0.12);
+  color: var(--green);
+  padding: 0.2rem 0.5rem;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+/* COMPARATOR */
+.compare-box {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 1rem;
+  align-items: start;
+}
+@media (max-width: 800px) {
+  .compare-box { grid-template-columns: 1fr; }
+}
+.compare-side {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1rem;
+}
+.compare-side select {
+  width: 100%;
+  padding: 0.65rem 0.8rem;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--card2);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.88rem;
+  margin-bottom: 0.9rem;
+  outline: none;
+}
+.compare-side select:focus { border-color: var(--green); }
+.compare-vs {
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.8rem; color: var(--gold);
+  padding-top: 2.5rem;
+}
+.compare-result h4 {
+  font-size: 0.95rem; margin-bottom: 0.5rem; color: var(--gold);
+}
+.compare-score {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.8rem; color: var(--text);
+  text-align: center; margin: 0.5rem 0 1rem;
+}
+.stat-bars { display: flex; flex-direction: column; gap: 0.65rem; }
+.stat-bar-row { font-size: 0.8rem; }
+.stat-bar-label {
+  display: flex; justify-content: space-between;
+  margin-bottom: 0.25rem; color: var(--muted);
+}
+.stat-bar-track {
+  height: 8px; background: rgba(255,255,255,0.08);
+  border-radius: 4px; overflow: hidden; display: flex;
+}
+.stat-bar-l { background: var(--green); height: 100%; }
+.stat-bar-r { background: var(--blue); height: 100%; margin-left: auto; }
+
+/* STAR PHOTOS */
+.star-photo img {
+  width: 100%; height: 100%;
+  object-fit: cover; border-radius: 50%;
+}
+.star-photo {
+  width: 80px; height: 80px;
+  overflow: hidden;
+  background: var(--card2);
+}
+.star-photo img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 50%;
+}
+
+
+
+
+
+
+
+select { min-width: 200px; cursor: pointer; }
+
+
+
+
+
+
+
+
+
+
+
+
+/* center line vertical for horizontal pitch */
+
+
+
+
+/* penalty areas hint */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+select { min-width: 200px; cursor: pointer; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+select {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--card2);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.95rem;
+  cursor: pointer;
+  outline: none;
+  appearance: auto;
+}
+select:focus { border-color: var(--green); }
+select option { background: var(--card); color: var(--text); }
+
+
+
+
+/* PAGE TRANSITION GOL */
+.gol-overlay {
+  position: fixed; inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0);
+  opacity: 0;
+  transition: opacity 0.25s, background 0.35s;
+}
+.gol-overlay.on {
+  opacity: 1;
+  background: rgba(0,0,0,0.55);
+  pointer-events: auto;
+}
+.gol-banner {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.5rem, 12vw, 5.5rem);
+  letter-spacing: 0.12em;
+  color: var(--gold);
+  text-shadow: 0 0 40px rgba(255,193,7,0.6), 0 4px 20px rgba(0,0,0,0.5);
+  transform: scale(0.4) translateY(40px);
+  opacity: 0;
+  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s;
+}
+.gol-overlay.on .gol-banner {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+}
+.gol-overlay.out .gol-banner {
+  transform: scale(1.2) translateY(-30px);
+  opacity: 0;
+}
+
+
+
+/* === CANCHA CLASICA === */
+.cancha-controls {
+  display: flex; flex-wrap: wrap; gap: 0.75rem;
+  align-items: center; margin-bottom: 0.75rem; justify-content: center;
+}
+.cancha-controls select {
+  min-width: 200px; cursor: pointer; padding: 0.65rem 1.1rem;
+  border-radius: 10px; border: 1px solid var(--line); background: var(--card);
+  color: var(--text); font-family: inherit; font-size: 0.92rem;
+}
+.cancha-controls button {
+  padding: 0.65rem 1.1rem; border-radius: 10px;
+  background: linear-gradient(135deg, var(--green), var(--green2));
+  border: none; color: #fff; font-weight: 600; cursor: pointer;
+  font-family: inherit; font-size: 0.92rem;
+}
+.cancha-controls button.secondary {
+  background: var(--card2); border: 1px solid var(--line); color: var(--text);
+}
+.cancha-layout {
+  display: flex; flex-wrap: wrap; gap: 1.25rem;
+  align-items: stretch; justify-content: center;
+  max-width: 980px; margin: 0.5rem auto 2rem; padding: 0.5rem;
+}
+.pitch-wrap {
+  flex: 1 1 520px;
+  display: flex; justify-content: center; align-items: center;
+  padding: 0.5rem;
+}
+/* Campo horizontal visto desde arriba — como diagrama FIFA */
+.pitch {
+  position: relative;
+  width: min(560px, 92vw);
+  aspect-ratio: 1.55 / 1;
+  border-radius: 6px;
+  border: 3px solid #fff;
+  background: repeating-linear-gradient(
+    90deg,
+    #2e7d32 0%, #2e7d32 12.5%,
+    #388e3c 12.5%, #388e3c 25%
+  );
+  box-shadow: 0 12px 36px rgba(0,0,0,0.45);
+  overflow: hidden;
+}
+.pitch-outline {
+  position: absolute; inset: 3%;
+  border: 2px solid rgba(255,255,255,0.95);
+  pointer-events: none;
+}
+.pitch-halfway {
+  position: absolute; top: 3%; bottom: 3%; left: 50%;
+  width: 0; border-left: 2px solid rgba(255,255,255,0.95);
+  pointer-events: none;
+}
+.pitch-center-circle {
+  position: absolute; left: 50%; top: 50%;
+  width: 18%; aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  border: 2px solid rgba(255,255,255,0.95);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.pitch-center-spot {
+  position: absolute; left: 50%; top: 50%;
+  width: 7px; height: 7px;
+  transform: translate(-50%, -50%);
+  background: #fff; border-radius: 50%;
+  pointer-events: none;
+}
+.pitch-box {
+  position: absolute; top: 22%; bottom: 22%;
+  width: 14%;
+  border: 2px solid rgba(255,255,255,0.95);
+  pointer-events: none;
+}
+.pitch-box-l { left: 3%; border-left: none; }
+.pitch-box-r { right: 3%; border-right: none; }
+.pitch-goal-area {
+  position: absolute; top: 35%; bottom: 35%;
+  width: 6%;
+  border: 2px solid rgba(255,255,255,0.95);
+  pointer-events: none;
+}
+.pitch-goal-l { left: 3%; border-left: none; }
+.pitch-goal-r { right: 3%; border-right: none; }
+.pitch-spot {
+  position: absolute; top: 50%;
+  width: 6px; height: 6px;
+  transform: translate(-50%, -50%);
+  background: #fff; border-radius: 50%;
+  pointer-events: none;
+}
+.pitch-spot-l { left: 12%; }
+.pitch-spot-r { left: 88%; }
+.pitch-arc {
+  position: absolute; top: 50%;
+  width: 10%; aspect-ratio: 1;
+  border: 2px solid rgba(255,255,255,0.95);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.pitch-arc-l {
+  left: 17%;
+  transform: translate(-50%, -50%);
+  clip-path: inset(0 0 0 50%);
+}
+.pitch-arc-r {
+  left: 83%;
+  transform: translate(-50%, -50%);
+  clip-path: inset(0 50% 0 0);
+}
+.pitch-slot {
+  position: absolute;
+  width: 44px; height: 44px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: rgba(0,0,0,0.4);
+  border: 2px dashed rgba(255,255,255,0.7);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: 0.2s;
+  font-size: 0.55rem; color: #fff;
+  text-align: center; line-height: 1.1; padding: 2px;
+  z-index: 3; font-weight: 600;
+}
+.pitch-slot:hover, .pitch-slot.active {
+  border-color: #ffc107;
+  background: rgba(255,193,7,0.45);
+  box-shadow: 0 0 12px rgba(255,193,7,0.5);
+}
+.pitch-slot.filled {
+  border-style: solid; border-color: #fff;
+  background: linear-gradient(135deg, #00c853, #00a844);
+  font-size: 0.5rem; font-weight: 700;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+.cancha-side {
+  flex: 0 1 220px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 0.85rem;
+  max-height: 360px;
+  overflow-y: auto;
+}
+.player-pick { display: flex; flex-direction: column; gap: 0.35rem; }
+.player-chip {
+  padding: 0.5rem 0.8rem; border-radius: 10px;
+  background: var(--card2); border: 1px solid var(--line);
+  font-size: 0.85rem; font-weight: 600; cursor: pointer;
+  transition: 0.15s; text-align: left; color: var(--text);
+  width: 100%; font-family: inherit;
+}
+.player-chip:hover {
+  border-color: var(--green);
+  background: rgba(0,200,83,0.15);
+}
+.player-chip.used { opacity: 0.35; pointer-events: none; }
+@media (max-width: 700px) {
+  .cancha-side { flex: 1 1 100%; max-height: 220px; }
+}
+
+
+/* ESTRELLAS: foto + nombre abajo + clic = info */
+.stars-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+.star-tile {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 0.85rem 0.65rem 1rem;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.star-tile:hover {
+  border-color: rgba(255,193,7,0.45);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+}
+.star-tile.open {
+  border-color: var(--gold) !important;
+  box-shadow: 0 8px 28px rgba(255,193,7,0.2) !important;
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 1.15rem 1.25rem 1.25rem;
+}
+.star-img-wrap {
+  width: 100px; height: 100px;
+  margin: 0 auto 0.55rem;
+  border-radius: 50%;
+  overflow: hidden;
+  background: linear-gradient(145deg, var(--card2), #0a1510);
+  border: 2px solid rgba(255,193,7,0.35);
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+}
+.star-tile.open .star-img-wrap {
+  float: none;
+  margin: 0 auto 0.55rem;
+  width: 110px; height: 110px;
+}
+.star-tile.open .star-name {
+  text-align: center;
+}
+.star-tile.open .star-detail {
+  text-align: left;
+}
+.star-img-wrap img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  pointer-events: none;
+}
+.star-fallback {
+  position: absolute;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.5rem;
+  color: var(--gold);
+  display: none;
+  pointer-events: none;
+}
+.star-img-wrap.no-img .star-fallback { display: block; }
+.star-name {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text);
+  line-height: 1.25;
+  pointer-events: none;
+}
+.star-tile.open .star-name {
+  font-size: 1.35rem;
+  color: var(--gold);
+  font-family: 'Bebas Neue', sans-serif;
+}
+.star-sub {
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-top: 0.15rem;
+  pointer-events: none;
+}
+.star-hint-tap {
+  display: block;
+  font-size: 0.68rem;
+  color: var(--gold);
+  margin-top: 0.4rem;
+  opacity: 0.85;
+}
+.star-tile.open .star-hint-tap { display: none; }
+.star-tile .star-detail {
+  display: none;
+  max-height: 0;
+  overflow: hidden;
+  clear: both;
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+  text-align: left;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--text);
+  transition: max-height 0.35s ease, margin 0.25s ease, padding 0.25s ease;
+}
+.star-tile.open .star-detail {
+  display: block !important;
+  max-height: 800px !important;
+  overflow: visible !important;
+  margin-top: 0.9rem !important;
+  padding-top: 0.9rem !important;
+  border-top: 1px solid var(--line) !important;
+}
+.star-tile .star-detail p { margin: 0.4rem 0; }
+.star-tile .star-stats {
+  display: flex; flex-wrap: wrap; gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+.star-tile .star-stat {
+  background: var(--card2);
+  border-radius: 8px;
+  padding: 0.4rem 0.65rem;
+  text-align: center;
+  min-width: 52px;
+}
+.star-tile .star-stat strong {
+  display: block;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.2rem;
+  color: var(--gold);
+  line-height: 1;
+}
+.star-tile .star-stat span {
+  font-size: 0.65rem;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+code {
+  background: var(--card2);
+  padding: 0.1rem 0.35rem;
+  border-radius: 4px;
+  font-size: 0.85em;
+}
+
+
+/* FIX CLIC ESTRELLAS — info debajo */
+.star-tile.open > .star-detail {
+  display: block !important;
+  max-height: 900px !important;
+  overflow: visible !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  margin-top: 0.9rem !important;
+  padding: 0.9rem 0 0 !important;
+  border-top: 1px solid var(--line) !important;
+  clear: both !important;
+  width: 100% !important;
+  text-align: left !important;
+}
+
+
+/* FONDO ANIMADO + PARTÍCULAS */
+@keyframes dynamicGradient {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes floatParticle {
+  0%   { transform: translateY(0) rotate(0deg) scale(1); opacity: 0.3; }
+  50%  { transform: translateY(-50px) rotate(180deg) scale(1.2); opacity: 0.6; }
+  100% { transform: translateY(0) rotate(360deg) scale(1); opacity: 0.3; }
+}
+.background-particles {
+  position: fixed; top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none; z-index: 0; overflow: hidden;
+}
+.particle {
+  position: absolute; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0) 70%);
+  animation: floatParticle 15s infinite linear;
+}
+.particle:nth-child(1) { width: 300px; height: 300px; top: 10%; left: 10%; animation-duration: 20s; }
+.particle:nth-child(2) { width: 450px; height: 450px; bottom: 5%; right: 15%; animation-duration: 25s; animation-delay: -5s; }
+.particle:nth-child(3) { width: 200px; height: 200px; top: 60%; left: 50%; animation-duration: 18s; animation-delay: -10s; }
+.particle:nth-child(4) { width: 280px; height: 280px; top: 30%; right: 25%; animation-duration: 22s; animation-delay: -8s; }
+.particle:nth-child(5) { width: 180px; height: 180px; bottom: 20%; left: 30%; animation-duration: 16s; animation-delay: -3s; }
+
+
+
+
+
+
+
+
+.cancha-analisis {
+  display: block;
+  max-width: 900px;
+  margin: 1.25rem auto 2rem;
+  padding: 1.15rem 1.25rem;
+  background: linear-gradient(145deg, #1c2a22, #162019);
+  border: 2px solid rgba(255,193,7,0.45);
+  border-radius: 14px;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: #f0f4fa;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.35);
+}
+.cancha-analisis[hidden] {
+  display: none !important;
+}
+.cancha-analisis h4 {
+  font-family: 'Bebas Neue', sans-serif;
+  color: #ffc107;
+  font-size: 1.25rem;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.55rem;
+}
+.cancha-analisis p { margin: 0.4rem 0; color: #8b9bb4; }
+.cancha-analisis p strong { color: #f0f4fa; }
+
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-brand">🏆 Mundial 2026</div>
+  <button class="nav-toggle" id="navToggle" aria-label="Menú">☰</button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#" data-panel="inicio" class="active">Inicio</a></li>
+    <li><a href="#" data-panel="tablas">Tablas</a></li>
+    <li><a href="#" data-panel="partidos">Partidos</a></li>
+    <li><a href="#" data-panel="arbol">Árbol</a></li>
+    <li><a href="#" data-panel="stats">Estadísticas</a></li>
+    <li><a href="#" data-panel="selecciones">Selecciones</a></li>
+    <li><a href="#" data-panel="estrellas">Estrellas</a></li>
+    <li><a href="#" data-panel="comparador">Comparador</a></li>
+    <li><a href="#" data-panel="cancha">Mi cancha</a></li>
+    <li><a href="#" data-panel="sedes">Sedes</a></li>
+  </ul>
+</nav>
+
+<div class="panel on" id="panel-inicio">
+<header class="hero">
+  <div class="hero-trophy">🏆</div>
+  <h1 aria-label="Mundial 2026"><span>M</span><span>U</span><span>N</span><span>D</span><span>I</span><span>A</span><span>L</span></h1>
+  <div class="hero-year">2026</div>
+  <p>Resultados · Tablas · Árbol · Estadísticas · 48 selecciones</p>
+  <div class="hero-flags"><span>USA</span><span>·</span><span>CAN</span><span>·</span><span>MEX</span></div>
+  <div class="summary-card">
+    <h3>📋 Resumen del Mundial</h3>
+    <div class="summary-row"><span class="label">Campeón</span><span class="value champ">ESP · España</span></div>
+    <div class="summary-row"><span class="label">Subcampeón</span><span class="value">ARG · Argentina</span></div>
+    <div class="summary-row"><span class="label">3er puesto</span><span class="value">ENG · Inglaterra</span></div>
+    <div class="summary-row"><span class="label">4º puesto</span><span class="value">FRA · Francia</span></div>
+    <div class="summary-row"><span class="label">Sede</span><span class="value">USA · CAN · MEX</span></div>
+    <div class="summary-row"><span class="label">Final</span><span class="value">España 1–0 ARG (prórroga)</span></div>
+    <div class="summary-row"><span class="label">Goleador</span><span class="value">Mbappé · 10 goles</span></div>
+  </div>
+</header>
+
+<div class="stats">
+  <div class="stat"><strong id="stM">104</strong><span>Partidos</span></div>
+  <div class="stat"><strong id="stG">308</strong><span>Goles</span></div>
+  <div class="stat"><strong id="stGr">12</strong><span>Grupos</span></div>
+  <div class="stat"><strong id="stT">48</strong><span>Selecciones</span></div>
+</div>
+
+
+</div>
+
+<section class="panel" id="panel-tablas">
+  <h2 class="sec-title">Tablas de posiciones</h2>
+  <p class="sec-desc">12 grupos · Clasifican los 2 primeros + 8 mejores terceros</p>
+  <div class="pills" id="groupPills"></div>
+  <div id="groupDetail"></div>
+  <div class="block-title" style="margin-top:1.5rem">Mejores terceros (clasifican los 8 primeros)</div>
+  <div id="thirdsTable"></div>
+</section>
+
+<section class="panel" id="panel-partidos">
+  <h2 class="sec-title">Fixture completo</h2>
+  <p class="sec-desc">104 partidos · Tocá una tarjeta para ver goles</p>
+  <div class="pills" id="phasePills">
+    <button type="button" class="pill on" data-p="groups">Fase de grupos</button>
+    <button type="button" class="pill" data-p="r32">Dieciseisavos</button>
+    <button type="button" class="pill" data-p="r16">Octavos</button>
+    <button type="button" class="pill" data-p="qf">Cuartos</button>
+    <button type="button" class="pill" data-p="sf">Semis</button>
+    <button type="button" class="pill" data-p="third">3er puesto</button>
+    <button type="button" class="pill" data-p="final">Final</button>
+  </div>
+  <div class="pills" id="subGroupPills" style="display:none"></div>
+  <div id="matchesBox"></div>
+</section>
+
+<section class="panel" id="panel-arbol">
+  <h2 class="sec-title">Árbol de eliminatorias</h2>
+  <p class="sec-desc">Desde dieciseisavos hasta la final · Tocá un partido para ver detalle</p>
+  <div class="bracket-wrap" id="bracketBox"></div>
+</section>
+
+<section class="panel" id="panel-stats">
+  <h2 class="sec-title">Estadísticas</h2>
+  <p class="sec-desc">Goleadores, equipos más goleadores y más datos del torneo</p>
+  <div class="stats-grid" id="statsBox"></div>
+</section>
+
+<section class="panel" id="panel-selecciones">
+  <h2 class="sec-title">48 selecciones</h2>
+  <p class="sec-desc">Perfiles · Cómo les fue · Tocá una tarjeta para más info</p>
+  <input type="search" class="search-box" id="teamSearch" placeholder="Buscar selección…">
+  <div class="teams-grid" id="teamsGrid"></div>
+</section>
+
+<section class="panel" id="panel-estrellas">
+  <h2 class="sec-title">Estrellas del Mundial</h2>
+  <p class="sec-desc">Apretá la foto o el nombre para ver la ficha completa</p>
+
+  <div class="block-title" style="margin-bottom:1rem;">Jugadores</div>
+  <div class="stars-gallery">
+
+    <div class="star-tile" data-star tabindex="0">
+      <div class="star-img-wrap">
+        <img src="img/estrellas/mbappe.jpg" alt="Kylian Mbappé" onerror="this.style.display='none';this.parentElement.classList.add('no-img')">
+        <span class="star-fallback">KM</span>
+      </div>
+      <div class="star-name">Kylian Mbappé</div>
+      <div class="star-sub">FRA · Francia · Goleador</div>
+      <div class="star-hint-tap">Apretá para ver por qué fue el mejor →</div>
+      <div class="star-detail">
+        <div class="star-stats">
+          <div class="star-stat"><strong>10</strong><span>Goles</span></div>
+          <div class="star-stat"><strong>2</strong><span>Asist.</span></div>
+          <div class="star-stat"><strong>7</strong><span>PJ</span></div>
+          <div class="star-stat"><strong>27</strong><span>Edad</span></div>
+        </div>
+        <p><strong>Posición:</strong> Delantero</p>
+        <p><strong>Entrenador:</strong> Didier Deschamps</p>
+        <p><strong>Club:</strong> Real Madrid</p>
+        <p><strong>Goles importantes:</strong> Doblete vs Senegal (grupos), doblete vs Irak, doblete vs Suecia en dieciseisavos. Máximo artillero del torneo.</p>
+        <p><strong>¿Por qué fue el mejor?</strong> Lideró la tabla de goleadores con 10 tantos. Su velocidad y definición fueron letales en cada fase, aunque Francia terminó 4ª.</p>
+      </div>
+    </div>
+
+    <div class="star-tile" data-star tabindex="0">
+      <div class="star-img-wrap">
+        <img src="img/estrellas/messi.jpg" alt="Lionel Messi" onerror="this.style.display='none';this.parentElement.classList.add('no-img')">
+        <span class="star-fallback">LM</span>
+      </div>
+      <div class="star-name">Lionel Messi</div>
+      <div class="star-sub">ARG · Argentina · Subcampeón</div>
+      <div class="star-hint-tap">Apretá para ver por qué fue el mejor →</div>
+      <div class="star-detail">
+        <div class="star-stats">
+          <div class="star-stat"><strong>8</strong><span>Goles</span></div>
+          <div class="star-stat"><strong>1</strong><span>Asist.</span></div>
+          <div class="star-stat"><strong>7</strong><span>PJ</span></div>
+          <div class="star-stat"><strong>39</strong><span>Edad</span></div>
+        </div>
+        <p><strong>Posición:</strong> Delantero / Mediapunta</p>
+        <p><strong>Entrenador:</strong> Lionel Scaloni</p>
+        <p><strong>Club:</strong> Inter Miami</p>
+        <p><strong>Goles importantes:</strong> Goles clave en eliminatorias y en el camino a la final de MetLife. 8 goles en 7 partidos a los 39 años.</p>
+        <p><strong>¿Por qué fue el mejor?</strong> Magia, liderazgo y goles decisivos. Llevó a Argentina hasta la final; solo cayó en la prórroga ante España.</p>
+      </div>
+    </div>
+
+    <div class="star-tile" data-star tabindex="0">
+      <div class="star-img-wrap">
+        <img src="img/estrellas/haaland.jpg" alt="Erling Haaland" onerror="this.style.display='none';this.parentElement.classList.add('no-img')">
+        <span class="star-fallback">EH</span>
+      </div>
+      <div class="star-name">Erling Haaland</div>
+      <div class="star-sub">NOR · Noruega</div>
+      <div class="star-hint-tap">Apretá para ver por qué fue el mejor →</div>
+      <div class="star-detail">
+        <div class="star-stats">
+          <div class="star-stat"><strong>7</strong><span>Goles</span></div>
+          <div class="star-stat"><strong>1</strong><span>Asist.</span></div>
+          <div class="star-stat"><strong>5</strong><span>PJ</span></div>
+          <div class="star-stat"><strong>25</strong><span>Edad</span></div>
+        </div>
+        <p><strong>Posición:</strong> Delantero centro</p>
+        <p><strong>Entrenador:</strong> Ståle Solbakken</p>
+        <p><strong>Club:</strong> Manchester City</p>
+        <p><strong>Goles importantes:</strong> Racha goleadora en fase de grupos; Noruega dependió de su poderío en el área en los partidos clave.</p>
+        <p><strong>¿Por qué fue el mejor?</strong> Máquina de goles. Imparable entre los centrales; uno de los delanteros más temidos del Mundial.</p>
+      </div>
+    </div>
+
+    <div class="star-tile" data-star tabindex="0">
+      <div class="star-img-wrap">
+        <img src="img/estrellas/bellingham.jpg" alt="Jude Bellingham" onerror="this.style.display='none';this.parentElement.classList.add('no-img')">
+        <span class="star-fallback">JB</span>
+      </div>
+      <div class="star-name">Jude Bellingham</div>
+      <div class="star-sub">ENG · Inglaterra · 3er puesto</div>
+      <div class="star-hint-tap">Apretá para ver por qué fue el mejor →</div>
+      <div class="star-detail">
+        <div class="star-stats">
+          <div class="star-stat"><strong>4</strong><span>Goles</span></div>
+          <div class="star-stat"><strong>3</strong><span>Asist.</span></div>
+          <div class="star-stat"><strong>7</strong><span>PJ</span></div>
+          <div class="star-stat"><strong>22</strong><span>Edad</span></div>
+        </div>
+        <p><strong>Posición:</strong> Mediocampista</p>
+        <p><strong>Entrenador:</strong> Thomas Tuchel</p>
+        <p><strong>Club:</strong> Real Madrid</p>
+        <p><strong>Goles importantes:</strong> Goles de llegada desde segunda línea en eliminatorias; asistencias clave en el camino al bronce.</p>
+        <p><strong>¿Por qué fue el mejor?</strong> Motor de Inglaterra. Liderazgo, físico y llegada al área a los 22 años hasta el 3er puesto.</p>
+      </div>
+    </div>
+
+    <div class="star-tile" data-star tabindex="0">
+      <div class="star-img-wrap">
+        <img src="img/estrellas/ferran.jpg" alt="Ferran Torres" onerror="this.style.display='none';this.parentElement.classList.add('no-img')">
+        <span class="star-fallback">FT</span>
+      </div>
+      <div class="star-name">Ferran Torres</div>
+      <div class="star-sub">ESP · España · Campeón</div>
+      <div class="star-hint-tap">Apretá para ver por qué fue el mejor →</div>
+      <div class="star-detail">
+        <div class="star-stats">
+          <div class="star-stat"><strong>5</strong><span>Goles</span></div>
+          <div class="star-stat"><strong>2</strong><span>Asist.</span></div>
+          <div class="star-stat"><strong>7</strong><span>PJ</span></div>
+          <div class="star-stat"><strong>26</strong><span>Edad</span></div>
+        </div>
+        <p><strong>Posición:</strong> Extremo / Delantero</p>
+        <p><strong>Entrenador:</strong> Luis de la Fuente</p>
+        <p><strong>Club:</strong> Barcelona</p>
+        <p><strong>Goles importantes:</strong> El más grande: gol del título al minuto 106 en la final vs Argentina en MetLife Stadium.</p>
+        <p><strong>¿Por qué fue el mejor?</strong> Campeón del mundo. El gol de la prórroga en la final lo consagró como figura histórica de España 2026.</p>
+      </div>
+    </div>
+
+    <div class="star-tile" data-star tabindex="0">
+      <div class="star-img-wrap">
+        <img src="img/estrellas/saka.jpg" alt="Bukayo Saka" onerror="this.style.display='none';this.parentElement.classList.add('no-img')">
+        <span class="star-fallback">BS</span>
+      </div>
+      <div class="star-name">Bukayo Saka</div>
+      <div class="star-sub">ENG · Inglaterra</div>
+      <div class="star-hint-tap">Apretá para ver por qué fue el mejor →</div>
+      <div class="star-detail">
+        <div class="star-stats">
+          <div class="star-stat"><strong>3</strong><span>Goles</span></div>
+          <div class="star-stat"><strong>4</strong><span>Asist.</span></div>
+          <div class="star-stat"><strong>7</strong><span>PJ</span></div>
+          <div class="star-stat"><strong>24</strong><span>Edad</span></div>
+        </div>
+        <p><strong>Posición:</strong> Extremo derecho</p>
+        <p><strong>Entrenador:</strong> Thomas Tuchel</p>
+        <p><strong>Club:</strong> Arsenal</p>
+        <p><strong>Goles importantes:</strong> Goles y asistencias en eliminatorias; desequilibrio constante por la banda derecha.</p>
+        <p><strong>¿Por qué fue el mejor?</strong> Clave en el 3er puesto inglés. Uno de los extremos más influyentes del torneo.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="block-title" style="margin:1.75rem 0 1rem;">Equipos</div>
+  <div class="stars-gallery">
+
+    <div class="star-tile" data-star tabindex="0">
+      <div class="star-img-wrap">
+        <img src="img/estrellas/equipo-esp.jpg" alt="España" onerror="this.style.display='none';this.parentElement.classList.add('no-img')">
+        <span class="star-fallback">ESP</span>
+      </div>
+      <div class="star-name">España</div>
+      <div class="star-sub">Campeón del mundo</div>
+      <div class="star-hint-tap">Apretá para ver por qué fueron estrellas →</div>
+      <div class="star-detail">
+        <div class="star-stats">
+          <div class="star-stat"><strong>1º</strong><span>Puesto</span></div>
+          <div class="star-stat"><strong>7</strong><span>PJ</span></div>
+          <div class="star-stat"><strong>0</strong><span>Derrotas</span></div>
+        </div>
+        <p><strong>Entrenador:</strong> Luis de la Fuente</p>
+        <p><strong>Figuras:</strong> Ferran Torres · Lamine Yamal · Pedri</p>
+        <p><strong>¿Por qué fueron estrellas?</strong> Invictos en grupos, eliminaron a Portugal y Bélgica, vencieron a Francia en semis y a Argentina en la final (gol de Ferran al 106'). Campeones del mundo 2026.</p>
+      </div>
+    </div>
+
+    <div class="star-tile" data-star tabindex="0">
+      <div class="star-img-wrap">
+        <img src="img/estrellas/equipo-arg.jpg" alt="Argentina" onerror="this.style.display='none';this.parentElement.classList.add('no-img')">
+        <span class="star-fallback">ARG</span>
+      </div>
+      <div class="star-name">Argentina</div>
+      <div class="star-sub">Subcampeón</div>
+      <div class="star-hint-tap">Apretá para ver por qué fueron estrellas →</div>
+      <div class="star-detail">
+        <div class="star-stats">
+          <div class="star-stat"><strong>2º</strong><span>Puesto</span></div>
+          <div class="star-stat"><strong>7</strong><span>PJ</span></div>
+        </div>
+        <p><strong>Entrenador:</strong> Lionel Scaloni</p>
+        <p><strong>Figuras:</strong> Messi · Álvarez · Enzo Fernández</p>
+        <p><strong>¿Por qué fueron estrellas?</strong> Camino heroico hasta la final en MetLife. Solo cayeron en la prórroga de la final. Competitividad y carácter de campeón hasta el último minuto.</p>
+      </div>
+    </div>
+
+    <div class="star-tile" data-star tabindex="0">
+      <div class="star-img-wrap">
+        <img src="img/estrellas/equipo-eng.jpg" alt="Inglaterra" onerror="this.style.display='none';this.parentElement.classList.add('no-img')">
+        <span class="star-fallback">ENG</span>
+      </div>
+      <div class="star-name">Inglaterra</div>
+      <div class="star-sub">3er puesto</div>
+      <div class="star-hint-tap">Apretá para ver por qué fueron estrellas →</div>
+      <div class="star-detail">
+        <div class="star-stats">
+          <div class="star-stat"><strong>3º</strong><span>Puesto</span></div>
+          <div class="star-stat"><strong>7</strong><span>PJ</span></div>
+        </div>
+        <p><strong>Entrenador:</strong> Thomas Tuchel</p>
+        <p><strong>Figuras:</strong> Bellingham · Saka · Kane</p>
+        <p><strong>¿Por qué fueron estrellas?</strong> Bronce mundial. Goleada 6-4 a Francia en el partido por el 3er puesto. Generación dorada en su mejor versión del torneo.</p>
+      </div>
+    </div>
+
+    <div class="star-tile" data-star tabindex="0">
+      <div class="star-img-wrap">
+        <img src="img/estrellas/equipo-fra.jpg" alt="Francia" onerror="this.style.display='none';this.parentElement.classList.add('no-img')">
+        <span class="star-fallback">FRA</span>
+      </div>
+      <div class="star-name">Francia</div>
+      <div class="star-sub">4º puesto</div>
+      <div class="star-hint-tap">Apretá para ver por qué fueron estrellas →</div>
+      <div class="star-detail">
+        <div class="star-stats">
+          <div class="star-stat"><strong>4º</strong><span>Puesto</span></div>
+          <div class="star-stat"><strong>7</strong><span>PJ</span></div>
+        </div>
+        <p><strong>Entrenador:</strong> Didier Deschamps</p>
+        <p><strong>Figuras:</strong> Mbappé · Dembélé · Tchouaméni</p>
+        <p><strong>¿Por qué fueron estrellas?</strong> Semifinalistas con el goleador del torneo (Mbappé, 10 goles). Potencia ofensiva hasta el final del camino.</p>
+      </div>
+    </div>
+
+    <div class="star-tile" data-star tabindex="0">
+      <div class="star-img-wrap">
+        <img src="img/estrellas/equipo-bra.jpg" alt="Brasil" onerror="this.style.display='none';this.parentElement.classList.add('no-img')">
+        <span class="star-fallback">BRA</span>
+      </div>
+      <div class="star-name">Brasil</div>
+      <div class="star-sub">Cuartos de final</div>
+      <div class="star-hint-tap">Apretá para ver por qué fueron estrellas →</div>
+      <div class="star-detail">
+        <div class="star-stats">
+          <div class="star-stat"><strong>CF</strong><span>Fase</span></div>
+          <div class="star-stat"><strong>5</strong><span>PJ</span></div>
+        </div>
+        <p><strong>Entrenador:</strong> Carlo Ancelotti</p>
+        <p><strong>Figuras:</strong> Vinícius Jr. · Rodrygo · Alisson</p>
+        <p><strong>¿Por qué fueron estrellas?</strong> Una de las selecciones más atractivas del Mundial. Juego ofensivo brillante hasta cuartos de final.</p>
+      </div>
+    </div>
+
+    <div class="star-tile" data-star tabindex="0">
+      <div class="star-img-wrap">
+        <img src="img/estrellas/equipo-mar.jpg" alt="Marruecos" onerror="this.style.display='none';this.parentElement.classList.add('no-img')">
+        <span class="star-fallback">MAR</span>
+      </div>
+      <div class="star-name">Marruecos</div>
+      <div class="star-sub">Cuartos de final</div>
+      <div class="star-hint-tap">Apretá para ver por qué fueron estrellas →</div>
+      <div class="star-detail">
+        <div class="star-stats">
+          <div class="star-stat"><strong>CF</strong><span>Fase</span></div>
+          <div class="star-stat"><strong>5</strong><span>PJ</span></div>
+        </div>
+        <p><strong>Entrenador:</strong> Walid Regragui</p>
+        <p><strong>Figuras:</strong> Hakimi · Ounahi · En-Nesyri</p>
+        <p><strong>¿Por qué fueron estrellas?</strong> Gesta africana: sólidos atrás, peligrosos al contragolpe y competitivos hasta cuartos de final.</p>
+      </div>
+    </div>
+
+    <div class="star-tile" data-star tabindex="0">
+      <div class="star-img-wrap">
+        <img src="img/estrellas/equipo-cpv.jpg" alt="Cabo Verde" onerror="this.style.display='none';this.parentElement.classList.add('no-img')">
+        <span class="star-fallback">CPV</span>
+      </div>
+      <div class="star-name">Cabo Verde</div>
+      <div class="star-sub">Octavos de final</div>
+      <div class="star-hint-tap">Apretá para ver por qué fueron estrellas →</div>
+      <div class="star-detail">
+        <div class="star-stats">
+          <div class="star-stat"><strong>R16</strong><span>Fase</span></div>
+          <div class="star-stat"><strong>4</strong><span>PJ</span></div>
+        </div>
+        <p><strong>Entrenador:</strong> Bubista</p>
+        <p><strong>Figuras:</strong> Ryan Mendes · Bebe · Garry Rodrigues</p>
+        <p><strong>¿Por qué fueron estrellas?</strong> Una de las sorpresas del Mundial. Primer Mundial de Cabo Verde: orden táctico, alma de equipo chico y noches inolvidables para las islas.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<section class="panel" id="panel-comparador">
+  <h2 class="sec-title">Comparador · País vs País</h2>
+  <p class="sec-desc">Elegí dos selecciones y mirá quién ganaría y por qué, según el Mundial 2026</p>
+  <div class="compare-box">
+    <div class="compare-side">
+      <select id="cmpA"><option value="">Selección A…</option></select>
+      <div id="cmpResultA" class="compare-result"></div>
+    </div>
+    <div class="compare-vs">VS</div>
+    <div class="compare-side">
+      <select id="cmpB"><option value="">Selección B…</option></select>
+      <div id="cmpResultB" class="compare-result"></div>
+    </div>
+  </div>
+  <div id="cmpBars" style="margin-top:1.5rem"></div>
+</section>
+
+
+
+<section class="panel" id="panel-cancha">
+  <h2 class="sec-title">Mi cancha ideal</h2>
+  <p class="sec-desc">Elegí una selección · Tocá una posición · Elegí un jugador de la lista</p>
+  <div class="cancha-controls">
+    <select id="canchaTeam"><option value="">Elegí selección…</option></select>
+    <button type="button" class="secondary" id="canchaClear">Limpiar cancha</button>
+  </div>
+  <p id="canchaHint" style="text-align:center;color:var(--muted);font-size:0.85rem;margin-bottom:1rem">Primero elegí una selección</p>
+  <div class="cancha-layout">
+    <div class="pitch-wrap">
+      <div class="pitch" id="pitch">
+        <div class="pitch-outline"></div>
+        <div class="pitch-halfway"></div>
+        <div class="pitch-center-circle"></div>
+        <div class="pitch-center-spot"></div>
+        <div class="pitch-box pitch-box-l"></div>
+        <div class="pitch-box pitch-box-r"></div>
+        <div class="pitch-goal-area pitch-goal-l"></div>
+        <div class="pitch-goal-area pitch-goal-r"></div>
+        <div class="pitch-spot pitch-spot-l"></div>
+        <div class="pitch-spot pitch-spot-r"></div>
+        <div class="pitch-arc pitch-arc-l"></div>
+        <div class="pitch-arc pitch-arc-r"></div>
+      </div>
+    </div>
+    <div class="cancha-side">
+      <div class="player-pick" id="playerPick"></div>
+    </div>
+  </div>
+  <div id="canchaAnalisis" class="cancha-analisis" hidden></div>
+</section>
+
+
+<section class="panel" id="panel-sedes">
+  <h2 class="sec-title">Sedes · Guía de estadios</h2>
+  <p class="sec-desc">16 ciudades · 11 EE.UU. · 3 México · 2 Canadá · Capacidades FIFA oficiales</p>
+  <div class="venue-grid" id="venuesGrid"></div>
+  <div class="block-title" style="margin-top:2rem">Clima actual</div>
+  <div class="cities" id="citiesGrid"></div>
+</section>
+
+<footer>
+  <p>Mundial 2026 · Campeón: <strong style="color:var(--gold)">España</strong> · EE.UU. · Canadá · México</p>
+  <p style="margin-top:0.35rem">104 partidos · 48 selecciones · 12 grupos</p>
+</footer>
+
+<script>
+const EMBEDDED_MATCHES = [{"round":"Matchday 1","date":"2026-06-11","time":"13:00 UTC-6","team1":"Mexico","team2":"South Africa","score":{"ft":[2,0],"ht":[1,0]},"goals1":[{"name":"Julián Quiñones","minute":"9"},{"name":"Raúl Jiménez","minute":"67"}],"goals2":[],"group":"Group A","ground":"Mexico City"},{"round":"Matchday 1","date":"2026-06-11","time":"20:00 UTC-6","team1":"South Korea","team2":"Czech Republic","score":{"ft":[2,1],"ht":[0,0]},"goals1":[{"name":"Hwang In-Beom","minute":"67"},{"name":"Oh Hyeon-Gyu","minute":"80"}],"goals2":[{"name":"Ladislav Krejcí","minute":"59"}],"group":"Group A","ground":"Guadalajara (Zapopan)"},{"round":"Matchday 8","date":"2026-06-18","time":"12:00 UTC-4","team1":"Czech Republic","team2":"South Africa","score":{"ft":[1,1],"ht":[1,0]},"goals1":[{"name":"Michal Sadílek","minute":"6"}],"goals2":[{"name":"Teboho Mokoena","minute":"83","penalty":true}],"group":"Group A","ground":"Atlanta"},{"round":"Matchday 8","date":"2026-06-18","time":"19:00 UTC-6","team1":"Mexico","team2":"South Korea","score":{"ft":[1,0],"ht":[0,0]},"goals1":[{"name":"Luis Romo","minute":"50"}],"goals2":[],"group":"Group A","ground":"Guadalajara (Zapopan)"},{"round":"Matchday 14","date":"2026-06-24","time":"19:00 UTC-6","team1":"Czech Republic","team2":"Mexico","score":{"ft":[0,3],"ht":[0,0]},"goals1":[],"goals2":[{"name":"Mateo Chávez","minute":"55"},{"name":"Julián Quiñones","minute":"61"},{"name":"Álvaro Fidalgo","minute":"90+4"}],"group":"Group A","ground":"Mexico City"},{"round":"Matchday 14","date":"2026-06-24","time":"19:00 UTC-6","team1":"South Africa","team2":"South Korea","score":{"ft":[1,0],"ht":[0,0]},"goals1":[{"name":"Thapelo Maseko","minute":"63"}],"goals2":[],"group":"Group A","ground":"Monterrey (Guadalupe)"},{"round":"Matchday 2","date":"2026-06-12","time":"15:00 UTC-4","team1":"Canada","team2":"Bosnia & Herzegovina","score":{"ft":[1,1],"ht":[0,1]},"goals1":[{"name":"Cyle Larin","minute":"78"}],"goals2":[{"name":"Jovo Lukić","minute":"21"}],"group":"Group B","ground":"Toronto"},{"round":"Matchday 3","date":"2026-06-13","time":"12:00 UTC-7","team1":"Qatar","team2":"Switzerland","score":{"ft":[1,1],"ht":[0,1]},"goals1":[{"name":"Miro Muheim","minute":"90+4","owngoal":true}],"goals2":[{"name":"Breel Embolo","minute":"17","penalty":true}],"group":"Group B","ground":"San Francisco Bay Area (Santa Clara)"},{"round":"Matchday 8","date":"2026-06-18","time":"12:00 UTC-7","team1":"Switzerland","team2":"Bosnia & Herzegovina","score":{"ft":[4,1],"ht":[0,0]},"goals1":[{"name":"Johan Manzambi","minute":"74"},{"name":"Rubén Vargas","minute":"84"},{"name":"Johan Manzambi","minute":"90"},{"name":"Granit Xhaka","minute":"90+7","penalty":true}],"goals2":[{"name":"Ermin Mahmic","minute":"90+3"}],"group":"Group B","ground":"Los Angeles (Inglewood)"},{"round":"Matchday 8","date":"2026-06-18","time":"15:00 UTC-7","team1":"Canada","team2":"Qatar","score":{"ft":[6,0],"ht":[3,0]},"goals1":[{"name":"Cyle Larin","minute":"16"},{"name":"Jonathan David","minute":"29"},{"name":"Jonathan David","minute":"45+3"},{"name":"Nathan Saliba","minute":"64"},{"name":"Mohamed Manai","minute":"75","owngoal":true},{"name":"Jonathan David","minute":"90+2"}],"goals2":[],"group":"Group B","ground":"Vancouver"},{"round":"Matchday 14","date":"2026-06-24","time":"12:00 UTC-7","team1":"Switzerland","team2":"Canada","score":{"ft":[2,1],"ht":[0,0]},"goals1":[{"name":"Rubén Vargas","minute":"46"},{"name":"Johan Manzambi","minute":"57"}],"goals2":[{"name":"Promise David","minute":"76"}],"group":"Group B","ground":"Vancouver"},{"round":"Matchday 14","date":"2026-06-24","time":"12:00 UTC-7","team1":"Bosnia & Herzegovina","team2":"Qatar","score":{"ft":[3,1],"ht":[2,1]},"goals1":[{"name":"Kerim Alajbegovic","minute":"29"},{"name":"Mahmoud Abunada","minute":"34","owngoal":true},{"name":"Ermin Mahmic","minute":"80"}],"goals2":[{"name":"Hassan Al-Haydos","minute":"42"}],"group":"Group B","ground":"Seattle"},{"round":"Matchday 3","date":"2026-06-13","time":"18:00 UTC-4","team1":"Brazil","team2":"Morocco","score":{"ft":[1,1],"ht":[1,1]},"goals1":[{"name":"Vinícius Júnior","minute":"32"}],"goals2":[{"name":"Ismael Saibari","minute":"21"}],"group":"Group C","ground":"New York/New Jersey (East Rutherford)"},{"round":"Matchday 3","date":"2026-06-13","time":"21:00 UTC-4","team1":"Haiti","team2":"Scotland","score":{"ft":[0,1],"ht":[0,1]},"goals1":[],"goals2":[{"name":"John McGinn","minute":"28"}],"group":"Group C","ground":"Boston (Foxborough)"},{"round":"Matchday 9","date":"2026-06-19","time":"18:00 UTC-4","team1":"Scotland","team2":"Morocco","score":{"ft":[0,1],"ht":[0,1]},"goals1":[],"goals2":[{"name":"Ismael Saibari","minute":"2"}],"group":"Group C","ground":"Boston (Foxborough)"},{"round":"Matchday 9","date":"2026-06-19","time":"20:30 UTC-4","team1":"Brazil","team2":"Haiti","score":{"ft":[3,0],"ht":[3,0]},"goals1":[{"name":"Matheus Cunha","minute":"23"},{"name":"Matheus Cunha","minute":"36"},{"name":"Vinícius Júnior","minute":"45+3"}],"goals2":[],"group":"Group C","ground":"Philadelphia"},{"round":"Matchday 14","date":"2026-06-24","time":"18:00 UTC-4","team1":"Scotland","team2":"Brazil","score":{"ft":[0,3],"ht":[0,2]},"goals1":[],"goals2":[{"name":"Vinícius Júnior","minute":"7"},{"name":"Vinícius Júnior","minute":"45+3"},{"name":"Matheus Cunha","minute":"60"}],"group":"Group C","ground":"Miami (Miami Gardens)"},{"round":"Matchday 14","date":"2026-06-24","time":"18:00 UTC-4","team1":"Morocco","team2":"Haiti","score":{"ft":[4,2],"ht":[2,2]},"goals1":[{"name":"Achraf Hakimi","minute":"39"},{"name":"Ismael Saibari","minute":"45+1"},{"name":"Soufiane Rahimi","minute":"78"},{"name":"Gessime Yassine","minute":"89"}],"goals2":[{"name":"Yassine Bounou","minute":"10","owngoal":true},{"name":"Wilson Isidor","minute":"43"}],"group":"Group C","ground":"Atlanta"},{"round":"Matchday 2","date":"2026-06-12","time":"18:00 UTC-7","team1":"USA","team2":"Paraguay","score":{"ft":[4,1],"ht":[3,0]},"goals1":[{"name":"Damian Bobadilla","minute":"7","owngoal":true},{"name":"Folarin Balogun","minute":"31"},{"name":"Folarin Balogun","minute":"45+5"},{"name":"Giovanni Reyna","minute":"90+8"}],"goals2":[{"name":"Mauricio","minute":"73"}],"group":"Group D","ground":"Los Angeles (Inglewood)"},{"round":"Matchday 3","date":"2026-06-13","time":"21:00 UTC-7","team1":"Australia","team2":"Turkey","score":{"ft":[2,0],"ht":[1,0]},"goals1":[{"name":"Nestory Irankunda","minute":"27"},{"name":"Connor Metcalfe","minute":"75"}],"goals2":[],"group":"Group D","ground":"Vancouver"},{"round":"Matchday 9","date":"2026-06-19","time":"12:00 UTC-7","team1":"USA","team2":"Australia","score":{"ft":[2,0],"ht":[2,0]},"goals1":[{"name":"Cameron Burgess","minute":"11","owngoal":true},{"name":"Alex Freeman","minute":"43"}],"goals2":[],"group":"Group D","ground":"Seattle"},{"round":"Matchday 9","date":"2026-06-19","time":"20:00 UTC-7","team1":"Turkey","team2":"Paraguay","score":{"ft":[0,1],"ht":[0,1]},"goals1":[],"goals2":[{"name":"Matías Galarza","minute":"2"}],"group":"Group D","ground":"San Francisco Bay Area (Santa Clara)"},{"round":"Matchday 15","date":"2026-06-25","time":"19:00 UTC-7","team1":"Turkey","team2":"USA","score":{"ft":[3,2],"ht":[2,1]},"goals1":[{"name":"Arda Güler","minute":"10"},{"name":"Baris Alper Yilmaz","minute":"31"},{"name":"Kaan Ayhan","minute":"90+8"}],"goals2":[{"name":"Auston Trusty","minute":"3"},{"name":"Sebastian Berhalter","minute":"49"}],"group":"Group D","ground":"Los Angeles (Inglewood)"},{"round":"Matchday 15","date":"2026-06-25","time":"19:00 UTC-7","team1":"Paraguay","team2":"Australia","score":{"ft":[0,0],"ht":[0,0]},"group":"Group D","ground":"San Francisco Bay Area (Santa Clara)"},{"round":"Matchday 4","date":"2026-06-14","time":"12:00 UTC-5","team1":"Germany","team2":"Curaçao","score":{"ft":[7,1],"ht":[3,1]},"goals1":[{"name":"Felix Nmecha","minute":"6"},{"name":"Nico Schlotterbeck","minute":"38"},{"name":"Kai Havertz","minute":"45+5","penalty":true},{"name":"Jamal Musiala","minute":"47"},{"name":"Nathaniel Brown","minute":"68"},{"name":"Deniz Undav","minute":"78"},{"name":"Kai Havertz","minute":"88"}],"goals2":[{"name":"Livano Comenencia","minute":"21"}],"group":"Group E","ground":"Houston"},{"round":"Matchday 4","date":"2026-06-14","time":"19:00 UTC-4","team1":"Ivory Coast","team2":"Ecuador","score":{"ft":[1,0],"ht":[0,0]},"goals1":[{"name":"Amad Diallo","minute":"90"}],"goals2":[],"group":"Group E","ground":"Philadelphia"},{"round":"Matchday 10","date":"2026-06-20","time":"16:00 UTC-4","team1":"Germany","team2":"Ivory Coast","score":{"ft":[2,1],"ht":[0,1]},"goals1":[{"name":"Deniz Undav","minute":"68"},{"name":"Deniz Undav","minute":"90+4"}],"goals2":[{"name":"Franck Kessié","minute":"30"}],"group":"Group E","ground":"Toronto"},{"round":"Matchday 10","date":"2026-06-20","time":"19:00 UTC-5","team1":"Ecuador","team2":"Curaçao","score":{"ft":[0,0],"ht":[0,0]},"group":"Group E","ground":"Kansas City"},{"round":"Matchday 15","date":"2026-06-25","time":"16:00 UTC-4","team1":"Curaçao","team2":"Ivory Coast","score":{"ft":[0,2],"ht":[0,1]},"goals1":[],"goals2":[{"name":"Nicolas Pépé","minute":"7"},{"name":"Nicolas Pépé","minute":"64"}],"group":"Group E","ground":"Philadelphia"},{"round":"Matchday 15","date":"2026-06-25","time":"16:00 UTC-4","team1":"Ecuador","team2":"Germany","score":{"ft":[2,1],"ht":[1,1]},"goals1":[{"name":"Nilson Angulo","minute":"9"},{"name":"Gonzalo Plata","minute":"77"}],"goals2":[{"name":"Leroy Sané","minute":"2"}],"group":"Group E","ground":"New York/New Jersey (East Rutherford)"},{"round":"Matchday 4","date":"2026-06-14","time":"15:00 UTC-5","team1":"Netherlands","team2":"Japan","score":{"ft":[2,2],"ht":[0,0]},"goals1":[{"name":"Virgil van Dijk","minute":"51"},{"name":"Crysencio Summerville","minute":"64"}],"goals2":[{"name":"Keito Nakamura","minute":"57"},{"name":"Daichi Kamada","minute":"88"}],"group":"Group F","ground":"Dallas (Arlington)"},{"round":"Matchday 4","date":"2026-06-14","time":"20:00 UTC-6","team1":"Sweden","team2":"Tunisia","score":{"ft":[5,1],"ht":[2,1]},"goals1":[{"name":"Yasin Ayari","minute":"7"},{"name":"Alexander Isak","minute":"30"},{"name":"Viktor Gyökeres","minute":"59"},{"name":"Mattias Svanberg","minute":"84"},{"name":"Yasin Ayari","minute":"90+6"}],"goals2":[{"name":"Omar Rekik","minute":"43"}],"group":"Group F","ground":"Monterrey (Guadalupe)"},{"round":"Matchday 10","date":"2026-06-20","time":"12:00 UTC-5","team1":"Netherlands","team2":"Sweden","score":{"ft":[5,1],"ht":[2,0]},"goals1":[{"name":"Brian Brobbey","minute":"5"},{"name":"Brian Brobbey","minute":"17"},{"name":"Cody Gakpo","minute":"47"},{"name":"Cody Gakpo","minute":"54"},{"name":"Crysencio Summerville","minute":"89"}],"goals2":[{"name":"Anthony Elanga","minute":"59"}],"group":"Group F","ground":"Houston"},{"round":"Matchday 10","date":"2026-06-20","time":"22:00 UTC-6","team1":"Tunisia","team2":"Japan","score":{"ft":[0,4],"ht":[0,2]},"goals1":[],"goals2":[{"name":"Daichi Kamada","minute":"4"},{"name":"Ayase Ueda","minute":"31"},{"name":"Junya Ito","minute":"69"},{"name":"Ayase Ueda","minute":"83"}],"group":"Group F","ground":"Monterrey (Guadalupe)"},{"round":"Matchday 15","date":"2026-06-25","time":"18:00 UTC-5","team1":"Japan","team2":"Sweden","score":{"ft":[1,1],"ht":[0,0]},"goals1":[{"name":"Daizen Maeda","minute":"56"}],"goals2":[{"name":"Anthony Elanga","minute":"62"}],"group":"Group F","ground":"Dallas (Arlington)"},{"round":"Matchday 15","date":"2026-06-25","time":"18:00 UTC-5","team1":"Tunisia","team2":"Netherlands","score":{"ft":[1,3],"ht":[0,2]},"goals1":[{"name":"Hazem Mastouri","minute":"54"}],"goals2":[{"name":"Ellyes Skhiri","minute":"3","owngoal":true},{"name":"Brian Brobbey","minute":"7"},{"name":"Jan Paul van Hecke","minute":"62"}],"group":"Group F","ground":"Kansas City"},{"round":"Matchday 5","date":"2026-06-15","time":"12:00 UTC-7","team1":"Belgium","team2":"Egypt","score":{"ft":[1,1],"ht":[0,1]},"goals1":[{"name":"Mohamed Hany","minute":"66","owngoal":true}],"goals2":[{"name":"Emam Ashour","minute":"19"}],"group":"Group G","ground":"Seattle"},{"round":"Matchday 5","date":"2026-06-15","time":"18:00 UTC-7","team1":"Iran","team2":"New Zealand","score":{"ft":[2,2],"ht":[1,1]},"goals1":[{"name":"Ramin Rezaeian","minute":"32"},{"name":"Mohammad Mohebbi","minute":"64"}],"goals2":[{"name":"Elijah Just","minute":"7"},{"name":"Elijah Just","minute":"54"}],"group":"Group G","ground":"Los Angeles (Inglewood)"},{"round":"Matchday 11","date":"2026-06-21","time":"12:00 UTC-7","team1":"Belgium","team2":"Iran","score":{"ft":[0,0],"ht":[0,0]},"group":"Group G","ground":"Los Angeles (Inglewood)"},{"round":"Matchday 11","date":"2026-06-21","time":"18:00 UTC-7","team1":"New Zealand","team2":"Egypt","score":{"ft":[1,3],"ht":[1,0]},"goals1":[{"name":"Finn Surman","minute":"15"}],"goals2":[{"name":"Mostafa Zico","minute":"58"},{"name":"Mohamed Salah","minute":"67"},{"name":"Trézéguet","minute":"82"}],"group":"Group G","ground":"Vancouver"},{"round":"Matchday 16","date":"2026-06-26","time":"20:00 UTC-7","team1":"Egypt","team2":"Iran","score":{"ft":[1,1],"ht":[1,1]},"goals1":[{"name":"Mahmoud Saber","minute":"5"}],"goals2":[{"name":"Ramin Rezaeian","minute":"14"}],"group":"Group G","ground":"Seattle"},{"round":"Matchday 16","date":"2026-06-26","time":"20:00 UTC-7","team1":"New Zealand","team2":"Belgium","score":{"ft":[1,5],"ht":[0,1]},"goals1":[{"name":"Elijah Just","minute":"84"}],"goals2":[{"name":"Leandro Trossard","minute":"28"},{"name":"Leandro Trossard","minute":"50"},{"name":"Kevin De Bruyne","minute":"66"},{"name":"Romelu Lukaku","minute":"86"},{"name":"Alexis Saelemaekers","minute":"90+4"}],"group":"Group G","ground":"Vancouver"},{"round":"Matchday 5","date":"2026-06-15","time":"12:00 UTC-4","team1":"Spain","team2":"Cape Verde","score":{"ft":[0,0],"ht":[0,0]},"group":"Group H","ground":"Atlanta"},{"round":"Matchday 5","date":"2026-06-15","time":"18:00 UTC-4","team1":"Saudi Arabia","team2":"Uruguay","score":{"ft":[1,1],"ht":[1,0]},"goals1":[{"name":"Abdulelah Al-Amri","minute":"41"}],"goals2":[{"name":"Maxi Araújo","minute":"80"}],"group":"Group H","ground":"Miami (Miami Gardens)"},{"round":"Matchday 11","date":"2026-06-21","time":"12:00 UTC-4","team1":"Spain","team2":"Saudi Arabia","score":{"ft":[4,0],"ht":[3,0]},"goals1":[{"name":"Lamine Yamal","minute":"10"},{"name":"Mikel Oyarzabal","minute":"21"},{"name":"Mikel Oyarzabal","minute":"24"},{"name":"Hassan Al-Tambakti","minute":"49","owngoal":true}],"goals2":[],"group":"Group H","ground":"Atlanta"},{"round":"Matchday 11","date":"2026-06-21","time":"18:00 UTC-4","team1":"Uruguay","team2":"Cape Verde","score":{"ft":[2,2],"ht":[2,1]},"goals1":[{"name":"Maxi Araújo","minute":"44"},{"name":"Agustín Cano","minute":"45+6"}],"goals2":[{"name":"Kevin Pina","minute":"21"},{"name":"Hélio Varela","minute":"61"}],"group":"Group H","ground":"Miami (Miami Gardens)"},{"round":"Matchday 16","date":"2026-06-26","time":"19:00 UTC-5","team1":"Cape Verde","team2":"Saudi Arabia","score":{"ft":[0,0],"ht":[0,0]},"group":"Group H","ground":"Houston"},{"round":"Matchday 16","date":"2026-06-26","time":"18:00 UTC-6","team1":"Uruguay","team2":"Spain","score":{"ft":[0,1],"ht":[0,1]},"goals1":[],"goals2":[{"name":"Álex Baena","minute":"42"}],"group":"Group H","ground":"Guadalajara (Zapopan)"},{"round":"Matchday 6","date":"2026-06-16","time":"15:00 UTC-4","team1":"France","team2":"Senegal","score":{"ft":[3,1],"ht":[0,0]},"goals1":[{"name":"Kylian Mbappé","minute":"66"},{"name":"Bradley Barcola","minute":"82"},{"name":"Kylian Mbappé","minute":"90+6"}],"goals2":[{"name":"Ibrahim Mbaye","minute":"90+5"}],"group":"Group I","ground":"New York/New Jersey (East Rutherford)"},{"round":"Matchday 6","date":"2026-06-16","time":"18:00 UTC-4","team1":"Iraq","team2":"Norway","score":{"ft":[1,4],"ht":[1,2]},"goals1":[{"name":"Aymen Hussein","minute":"39"}],"goals2":[{"name":"Erling Haaland","minute":"29"},{"name":"Erling Haaland","minute":"43"},{"name":"Leo Østigard","minute":"76"},{"name":"Aymen Hussein","minute":"90+6","owngoal":true}],"group":"Group I","ground":"Boston (Foxborough)"},{"round":"Matchday 12","date":"2026-06-22","time":"17:00 UTC-4","team1":"France","team2":"Iraq","score":{"ft":[3,0],"ht":[1,0]},"goals1":[{"name":"Kylian Mbappé","minute":"14"},{"name":"Kylian Mbappé","minute":"54"},{"name":"Ousmane Dembélé","minute":"66"}],"goals2":[],"group":"Group I","ground":"Philadelphia"},{"round":"Matchday 12","date":"2026-06-22","time":"20:00 UTC-4","team1":"Norway","team2":"Senegal","score":{"ft":[3,2],"ht":[1,0]},"goals1":[{"name":"Marcus Holmgren Pedersen","minute":"43"},{"name":"Erling Haaland","minute":"48"},{"name":"Erling Haaland","minute":"58"}],"goals2":[{"name":"Ismaïla Sarr","minute":"53"},{"name":"Ismaïla Sarr","minute":"90+3"}],"group":"Group I","ground":"New York/New Jersey (East Rutherford)"},{"round":"Matchday 16","date":"2026-06-26","time":"15:00 UTC-4","team1":"Norway","team2":"France","score":{"ft":[1,4],"ht":[1,3]},"goals1":[{"name":"Thelo Aasgaard","minute":"21"}],"goals2":[{"name":"Ousmane Dembélé","minute":"7"},{"name":"Ousmane Dembélé","minute":"20"},{"name":"Ousmane Dembélé","minute":"32"},{"name":"Désiré Doué","minute":"90+4"}],"group":"Group I","ground":"Boston (Foxborough)"},{"round":"Matchday 16","date":"2026-06-26","time":"15:00 UTC-4","team1":"Senegal","team2":"Iraq","score":{"ft":[5,0],"ht":[1,0]},"goals1":[{"name":"Habib Diarra","minute":"4"},{"name":"Ismaïla Sarr","minute":"56"},{"name":"Pape Gueye","minute":"59"},{"name":"Pape Gueye","minute":"71"},{"name":"Iliman Ndiaye","minute":"82"}],"goals2":[],"group":"Group I","ground":"Toronto"},{"round":"Matchday 6","date":"2026-06-16","time":"20:00 UTC-5","team1":"Argentina","team2":"Algeria","score":{"ft":[3,0],"ht":[1,0]},"goals1":[{"name":"Lionel Messi","minute":"17"},{"name":"Lionel Messi","minute":"60"},{"name":"Lionel Messi","minute":"76"}],"goals2":[],"group":"Group J","ground":"Kansas City"},{"round":"Matchday 6","date":"2026-06-16","time":"21:00 UTC-7","team1":"Austria","team2":"Jordan","score":{"ft":[3,1],"ht":[1,0]},"goals1":[{"name":"Romano Schmid","minute":"21"},{"name":"Yazan Al-Arab","minute":"76","owngoal":true},{"name":"Marko Arnautovic","minute":"90+12","penalty":true}],"goals2":[{"name":"Ali Olwan","minute":"50"}],"group":"Group J","ground":"San Francisco Bay Area (Santa Clara)"},{"round":"Matchday 12","date":"2026-06-22","time":"12:00 UTC-5","team1":"Argentina","team2":"Austria","score":{"ft":[2,0],"ht":[1,0]},"goals1":[{"name":"Lionel Messi","minute":"38"},{"name":"Lionel Messi","minute":"90+5"}],"goals2":[],"group":"Group J","ground":"Dallas (Arlington)"},{"round":"Matchday 12","date":"2026-06-22","time":"20:00 UTC-7","team1":"Jordan","team2":"Algeria","score":{"ft":[1,2],"ht":[1,0]},"goals1":[{"name":"Nizar Al-Rashdan","minute":"36"}],"goals2":[{"name":"Nadhir Benbouali","minute":"69"},{"name":"Amine Gouiri","minute":"82"}],"group":"Group J","ground":"San Francisco Bay Area (Santa Clara)"},{"round":"Matchday 17","date":"2026-06-27","time":"21:00 UTC-5","team1":"Algeria","team2":"Austria","score":{"ft":[3,3],"ht":[1,1]},"goals1":[{"name":"Rafik Belghali","minute":"45"},{"name":"Riyad Mahrez","minute":"60"},{"name":"Riyad Mahrez","minute":"90+3"}],"goals2":[{"name":"Marko Arnautovic","minute":"28"},{"name":"Marcel Sabitzer","minute":"55"},{"name":"Sasa Kalajdzic","minute":"90+6"}],"group":"Group J","ground":"Kansas City"},{"round":"Matchday 17","date":"2026-06-27","time":"21:00 UTC-5","team1":"Jordan","team2":"Argentina","score":{"ft":[1,3],"ht":[0,2]},"goals1":[{"name":"Mousa Al-Tamari","minute":"55"}],"goals2":[{"name":"Giovani Lo Celso","minute":"19"},{"name":"Lautaro Martínez","minute":"31","penalty":true},{"name":"Lionel Messi","minute":"80"}],"group":"Group J","ground":"Dallas (Arlington)"},{"round":"Matchday 7","date":"2026-06-17","time":"12:00 UTC-5","team1":"Portugal","team2":"DR Congo","score":{"ft":[1,1],"ht":[1,1]},"goals1":[{"name":"João Neves","minute":"6"}],"goals2":[{"name":"Yoane Wissa","minute":"45+5"}],"group":"Group K","ground":"Houston"},{"round":"Matchday 7","date":"2026-06-17","time":"20:00 UTC-6","team1":"Uzbekistan","team2":"Colombia","score":{"ft":[1,3],"ht":[0,1]},"goals1":[{"name":"Abbosbek Fayzullaev","minute":"60"}],"goals2":[{"name":"Daniel Muñoz","minute":"40"},{"name":"Luis Díaz","minute":"65"},{"name":"Jáminton Campaz","minute":"90+9"}],"group":"Group K","ground":"Mexico City"},{"round":"Matchday 13","date":"2026-06-23","time":"12:00 UTC-5","team1":"Portugal","team2":"Uzbekistan","score":{"ft":[5,0],"ht":[3,0]},"goals1":[{"name":"Cristiano Ronaldo","minute":"6"},{"name":"Nuno Mendes","minute":"17"},{"name":"Cristiano Ronaldo","minute":"39"},{"name":"Abduvohid Nematov","minute":"60","owngoal":true},{"name":"Rafael Leão","minute":"87"}],"goals2":[],"group":"Group K","ground":"Houston"},{"round":"Matchday 13","date":"2026-06-23","time":"20:00 UTC-6","team1":"Colombia","team2":"DR Congo","score":{"ft":[1,0],"ht":[0,0]},"goals1":[{"name":"Daniel Muñoz","minute":"76"}],"goals2":[],"group":"Group K","ground":"Guadalajara (Zapopan)"},{"round":"Matchday 17","date":"2026-06-27","time":"19:30 UTC-4","team1":"Colombia","team2":"Portugal","score":{"ft":[0,0],"ht":[0,0]},"group":"Group K","ground":"Miami (Miami Gardens)"},{"round":"Matchday 17","date":"2026-06-27","time":"19:30 UTC-4","team1":"DR Congo","team2":"Uzbekistan","score":{"ft":[3,1],"ht":[0,1]},"goals1":[{"name":"Yoane Wissa","minute":"68","penalty":true},{"name":"Fiston Mayele","minute":"78"},{"name":"Yoane Wissa","minute":"90+1"}],"goals2":[{"name":"Eldor Shomurodov","minute":"10"}],"group":"Group K","ground":"Atlanta"},{"round":"Matchday 7","date":"2026-06-17","time":"15:00 UTC-5","team1":"England","team2":"Croatia","score":{"ft":[4,2],"ht":[2,2]},"goals1":[{"name":"Harry Kane","minute":"12","penalty":true},{"name":"Harry Kane","minute":"42"},{"name":"Jude Bellingham","minute":"47"},{"name":"Marcus Rashford","minute":"85"}],"goals2":[{"name":"Martin Baturina","minute":"36"},{"name":"Petar Musa","minute":"45+5"}],"group":"Group L","ground":"Dallas (Arlington)"},{"round":"Matchday 7","date":"2026-06-17","time":"19:00 UTC-4","team1":"Ghana","team2":"Panama","score":{"ft":[1,0],"ht":[0,0]},"goals1":[{"name":"Caleb Yirenkyi","minute":"90+5"}],"goals2":[],"group":"Group L","ground":"Toronto"},{"round":"Matchday 13","date":"2026-06-23","time":"16:00 UTC-4","team1":"England","team2":"Ghana","score":{"ft":[0,0],"ht":[0,0]},"group":"Group L","ground":"Boston (Foxborough)"},{"round":"Matchday 13","date":"2026-06-23","time":"19:00 UTC-4","team1":"Panama","team2":"Croatia","score":{"ft":[0,1],"ht":[0,0]},"goals1":[],"goals2":[{"name":"Ante Budimir","minute":"54"}],"group":"Group L","ground":"Toronto"},{"round":"Matchday 17","date":"2026-06-27","time":"17:00 UTC-4","team1":"Panama","team2":"England","score":{"ft":[0,2],"ht":[0,0]},"goals1":[],"goals2":[{"name":"Jude Bellingham","minute":"62"},{"name":"Harry Kane","minute":"67"}],"group":"Group L","ground":"New York/New Jersey (East Rutherford)"},{"round":"Matchday 17","date":"2026-06-27","time":"17:00 UTC-4","team1":"Croatia","team2":"Ghana","score":{"ft":[2,1],"ht":[1,0]},"goals1":[{"name":"Petar Sucic","minute":"31"},{"name":"Nikola Vlasic","minute":"83"}],"goals2":[{"name":"Derrick Luckassen","minute":"73"}],"group":"Group L","ground":"Philadelphia"},{"round":"Round of 32","num":73,"date":"2026-06-28","time":"12:00 UTC-7","team1":"South Africa","team2":"Canada","score":{"ft":[0,1],"ht":[0,0]},"goals1":[],"goals2":[{"name":"Stephan Eustáquio","minute":"90+2"}],"ground":"Los Angeles (Inglewood)"},{"round":"Round of 32","num":74,"date":"2026-06-29","time":"16:30 UTC-4","team1":"Germany","team2":"Paraguay","score":{"p":[3,4],"et":[1,1],"ft":[1,1],"ht":[0,1]},"goals1":[{"name":"Kai Havertz","minute":"54"}],"goals2":[{"name":"Julio Enciso","minute":"42"}],"ground":"Boston (Foxborough)"},{"round":"Round of 32","num":75,"date":"2026-06-29","time":"19:00 UTC-6","team1":"Netherlands","team2":"Morocco","score":{"p":[2,3],"et":[1,1],"ft":[1,1],"ht":[0,0]},"goals1":[{"name":"Cody Gakpo","minute":"72"}],"goals2":[{"name":"Issa Diop","minute":"90+1"}],"ground":"Monterrey (Guadalupe)"},{"round":"Round of 32","num":76,"date":"2026-06-29","time":"12:00 UTC-5","team1":"Brazil","team2":"Japan","score":{"ft":[2,1],"ht":[0,1]},"goals1":[{"name":"Casemiro","minute":"56"},{"name":"Gabriel Martinelli","minute":"90+5"}],"goals2":[{"name":"Kaishu Sano","minute":"29"}],"ground":"Houston"},{"round":"Round of 32","num":77,"date":"2026-06-30","time":"17:00 UTC-4","team1":"France","team2":"Sweden","score":{"ft":[3,0],"ht":[1,0]},"goals1":[{"name":"Kylian Mbappé","minute":"45"},{"name":"Bradley Barcola","minute":"53"},{"name":"Kylian Mbappé","minute":"74"}],"goals2":[],"ground":"New York/New Jersey (East Rutherford)"},{"round":"Round of 32","num":78,"date":"2026-06-30","time":"12:00 UTC-5","team1":"Ivory Coast","team2":"Norway","score":{"ft":[1,2],"ht":[0,1]},"goals1":[{"name":"Amad Diallo","minute":"74"}],"goals2":[{"name":"Antonio Nusa","minute":"39"},{"name":"Erling Haaland","minute":"86"}],"ground":"Dallas (Arlington)"},{"round":"Round of 32","num":79,"date":"2026-06-30","time":"19:00 UTC-6","team1":"Mexico","team2":"Ecuador","score":{"ft":[2,0],"ht":[1,0]},"goals1":[{"name":"Julián Quiñones","minute":"31"},{"name":"Raúl Jiménez","minute":"45+1"}],"goals2":[],"ground":"Mexico City"},{"round":"Round of 32","num":80,"date":"2026-07-01","time":"12:00 UTC-4","team1":"England","team2":"DR Congo","score":{"ft":[2,1],"ht":[0,1]},"goals1":[{"name":"Harry Kane","minute":"75"},{"name":"Harry Kane","minute":"86"}],"goals2":[{"name":"Brian Cipenga","minute":"7"}],"ground":"Atlanta"},{"round":"Round of 32","num":81,"date":"2026-07-01","time":"17:00 UTC-7","team1":"USA","team2":"Bosnia & Herzegovina","score":{"ft":[2,0],"ht":[1,0]},"goals1":[{"name":"Folarin Balogun","minute":"45"},{"name":"Malik Tillman","minute":"82"}],"goals2":[],"ground":"San Francisco Bay Area (Santa Clara)"},{"round":"Round of 32","num":82,"date":"2026-07-01","time":"13:00 UTC-7","team1":"Belgium","team2":"Senegal","score":{"et":[3,2],"ft":[2,2],"ht":[0,1]},"goals1":[{"name":"Romelu Lukaku","minute":"86"},{"name":"Youri Tielemans","minute":"89"},{"name":"Youri Tielemans","minute":"120+5","penalty":true}],"goals2":[{"name":"Habib Diarra","minute":"25"},{"name":"Ismaïla Sarr","minute":"51"}],"ground":"Seattle"},{"round":"Round of 32","num":83,"date":"2026-07-02","time":"19:00 UTC-4","team1":"Portugal","team2":"Croatia","score":{"ft":[2,1],"ht":[0,0]},"goals1":[{"name":"Cristiano Ronaldo","minute":"68","penalty":true},{"name":"Gonçalo Ramos","minute":"90+4"}],"goals2":[{"name":"Ivan Perisic","minute":"53"}],"ground":"Toronto"},{"round":"Round of 32","num":84,"date":"2026-07-02","time":"12:00 UTC-7","team1":"Spain","team2":"Austria","score":{"ft":[3,0],"ht":[1,0]},"goals1":[{"name":"Mikel Oyarzabal","minute":"36"},{"name":"Pedro Porro","minute":"66"},{"name":"Mikel Oyarzabal","minute":"89"}],"goals2":[],"ground":"Los Angeles (Inglewood)"},{"round":"Round of 32","num":85,"date":"2026-07-02","time":"20:00 UTC-7","team1":"Switzerland","team2":"Algeria","score":{"ft":[2,0],"ht":[1,0]},"goals1":[{"name":"Breel Embolo","minute":"10"},{"name":"Dan Ndoye","minute":"46"}],"goals2":[],"ground":"Vancouver"},{"round":"Round of 32","num":86,"date":"2026-07-03","time":"18:00 UTC-4","team1":"Argentina","team2":"Cape Verde","score":{"et":[3,2],"ft":[1,1],"ht":[1,0]},"goals1":[{"name":"Lionel Messi","minute":"29"},{"name":"Lisandro Martínez","minute":"92"},{"name":"Diney Borges","minute":"111","owngoal":true}],"goals2":[{"name":"Deroy Duarte","minute":"59"},{"name":"Sidny Lopes Cabral","minute":"103"}],"ground":"Miami (Miami Gardens)"},{"round":"Round of 32","num":87,"date":"2026-07-03","time":"20:30 UTC-5","team1":"Colombia","team2":"Ghana","score":{"ft":[1,0],"ht":[1,0]},"goals1":[{"name":"Jhon Arias","minute":"14"}],"goals2":[],"ground":"Kansas City"},{"round":"Round of 32","num":88,"date":"2026-07-03","time":"13:00 UTC-5","team1":"Australia","team2":"Egypt","score":{"p":[2,4],"et":[1,1],"ft":[1,1],"ht":[0,1]},"goals1":[{"name":"Mohamed Hany","minute":"55","owngoal":true}],"goals2":[{"name":"Emam Ashour","minute":"13"}],"ground":"Dallas (Arlington)"},{"round":"Round of 16","num":89,"date":"2026-07-04","time":"17:00 UTC-4","team1":"Paraguay","team2":"France","score":{"ft":[0,1],"ht":[0,0]},"goals1":[],"goals2":[{"name":"Kylian Mbappé","minute":"70","penalty":true}],"ground":"Philadelphia"},{"round":"Round of 16","num":90,"date":"2026-07-04","time":"12:00 UTC-5","team1":"Canada","team2":"Morocco","score":{"ft":[0,3],"ht":[0,0]},"goals1":[],"goals2":[{"name":"Azzedine Ounahi","minute":"50"},{"name":"Azzedine Ounahi","minute":"82"},{"name":"Soufiane Rahimi","minute":"90+8"}],"ground":"Houston"},{"round":"Round of 16","num":91,"date":"2026-07-05","time":"16:00 UTC-4","team1":"Brazil","team2":"Norway","score":{"ft":[1,2],"ht":[0,0]},"goals1":[{"name":"Neymar","minute":"90+10","penalty":true}],"goals2":[{"name":"Erling Haaland","minute":"79"},{"name":"Erling Haaland","minute":"90"}],"ground":"New York/New Jersey (East Rutherford)"},{"round":"Round of 16","num":92,"date":"2026-07-05","time":"18:00 UTC-6","team1":"Mexico","team2":"England","score":{"ft":[2,3],"ht":[1,2]},"goals1":[{"name":"Julián Quiñones","minute":"42"},{"name":"Raúl Jiménez","minute":"69","penalty":true}],"goals2":[{"name":"Jude Bellingham","minute":"36"},{"name":"Jude Bellingham","minute":"38"},{"name":"Harry Kane","minute":"60","penalty":true}],"ground":"Mexico City"},{"round":"Round of 16","num":93,"date":"2026-07-06","time":"14:00 UTC-5","team1":"Portugal","team2":"Spain","score":{"ft":[0,1],"ht":[0,0]},"goals1":[],"goals2":[{"name":"Mikel Merino","minute":"90+1"}],"ground":"Dallas (Arlington)"},{"round":"Round of 16","num":94,"date":"2026-07-06","time":"17:00 UTC-7","team1":"USA","team2":"Belgium","score":{"ft":[1,4],"ht":[1,2]},"goals1":[{"name":"Malik Tillman","minute":"31"}],"goals2":[{"name":"Charles De Ketelaere","minute":"9"},{"name":"Charles De Ketelaere","minute":"33"},{"name":"Hans Vanaken","minute":"57"},{"name":"Romelu Lukaku","minute":"90+3"}],"ground":"Seattle"},{"round":"Round of 16","num":95,"date":"2026-07-07","time":"12:00 UTC-4","team1":"Argentina","team2":"Egypt","score":{"ft":[3,2],"ht":[0,1]},"goals1":[{"name":"Cristian Romero","minute":"79"},{"name":"Lionel Messi","minute":"83"},{"name":"Enzo Fernández","minute":"90+2"}],"goals2":[{"name":"Yasser Ibrahim","minute":"15"},{"name":"Mostafa Zico","minute":"67"}],"ground":"Atlanta"},{"round":"Round of 16","num":96,"date":"2026-07-07","time":"13:00 UTC-7","team1":"Switzerland","team2":"Colombia","score":{"p":[4,3],"et":[0,0],"ft":[0,0],"ht":[0,0]},"ground":"Vancouver"},{"round":"Quarter-final","num":97,"date":"2026-07-09","time":"16:00 UTC-4","team1":"France","team2":"Morocco","score":{"ft":[2,0],"ht":[0,0]},"goals1":[{"name":"Kylian Mbappé","minute":"60"},{"name":"Ousmane Dembélé","minute":"66"}],"goals2":[],"ground":"Boston (Foxborough)"},{"round":"Quarter-final","num":98,"date":"2026-07-10","time":"12:00 UTC-7","team1":"Spain","team2":"Belgium","score":{"ft":[2,1],"ht":[1,1]},"goals1":[{"name":"Fabián Ruiz","minute":"30"},{"name":"Mikel Merino","minute":"88"}],"goals2":[{"name":"Charles De Ketelaere","minute":"41"}],"ground":"Los Angeles (Inglewood)"},{"round":"Quarter-final","num":99,"date":"2026-07-11","time":"17:00 UTC-4","team1":"Norway","team2":"England","score":{"et":[1,2],"ft":[1,1],"ht":[1,1]},"goals1":[{"name":"Andreas Schjelderup","minute":"36"}],"goals2":[{"name":"Jude Bellingham","minute":"45+2"},{"name":"Jude Bellingham","minute":"93"}],"ground":"Miami (Miami Gardens)"},{"round":"Quarter-final","num":100,"date":"2026-07-11","time":"20:00 UTC-5","team1":"Argentina","team2":"Switzerland","score":{"et":[3,1],"ft":[1,1],"ht":[1,0]},"goals1":[{"name":"Alexis Mac Allister","minute":"10"},{"name":"Julián Álvarez","minute":"112"},{"name":"Lautaro Martínez","minute":"120+1"}],"goals2":[{"name":"Dan Ndoye","minute":"67"}],"ground":"Kansas City"},{"round":"Semi-final","num":101,"date":"2026-07-14","time":"14:00 UTC-5","team1":"France","team2":"Spain","score":{"ft":[0,2],"ht":[0,1]},"goals1":[],"goals2":[{"name":"Mikel Oyarzabal","minute":"22","penalty":true},{"name":"Pedro Porro","minute":"58"}],"ground":"Dallas (Arlington)"},{"round":"Semi-final","num":102,"date":"2026-07-15","time":"15:00 UTC-4","team1":"England","team2":"Argentina","score":{"ft":[1,2],"ht":[0,0]},"goals1":[{"name":"Anthony Gordon","minute":"55"}],"goals2":[{"name":"Enzo Fernández","minute":"86"},{"name":"Lautaro Martínez","minute":"92"}],"ground":"Atlanta"},{"round":"Match for third place","num":103,"date":"2026-07-18","time":"17:00 UTC-4","team1":"France","team2":"England","score":{"ft":[4,6],"ht":[0,4]},"goals1":[{"name":"Kylian Mbappé","minute":"48"},{"name":"Bradley Barcola","minute":"54"},{"name":"Kylian Mbappé","minute":"66"},{"name":"Ousmane Dembélé","minute":"90+6"}],"goals2":[{"name":"Declan Rice","minute":"3"},{"name":"Ezri Konsa","minute":"18"},{"name":"Bukayo Saka","minute":"37"},{"name":"Bukayo Saka","minute":"45+1"},{"name":"Bukayo Saka","minute":"87","penalty":true},{"name":"Jude Bellingham","minute":"90+8"}],"ground":"Miami (Miami Gardens)"},{"round":"Final","num":104,"date":"2026-07-19","time":"15:00 UTC-4","team1":"Spain","team2":"Argentina","score":{"et":[1,0],"ft":[0,0],"ht":[0,0]},"goals1":[{"name":"Ferran Torres","minute":"106"}],"goals2":[],"ground":"New York/New Jersey (East Rutherford)"}];
+
+const PAISES = {
+  "Algeria":{es:"Argelia",code:"ALG"},
+  "Argentina":{es:"Argentina",code:"ARG"},
+  "Australia":{es:"Australia",code:"AUS"},
+  "Austria":{es:"Austria",code:"AUT"},
+  "Belgium":{es:"Bélgica",code:"BEL"},
+  "Bosnia & Herzegovina":{es:"Bosnia y Herzegovina",code:"BIH"},
+  "Brazil":{es:"Brasil",code:"BRA"},
+  "Canada":{es:"Canadá",code:"CAN"},
+  "Cape Verde":{es:"Cabo Verde",code:"CPV"},
+  "Colombia":{es:"Colombia",code:"COL"},
+  "Croatia":{es:"Croacia",code:"CRO"},
+  "Curaçao":{es:"Curazao",code:"CUW"},
+  "Czech Republic":{es:"República Checa",code:"CZE"},
+  "DR Congo":{es:"RD del Congo",code:"COD"},
+  "Ecuador":{es:"Ecuador",code:"ECU"},
+  "Egypt":{es:"Egipto",code:"EGY"},
+  "England":{es:"Inglaterra",code:"ENG"},
+  "France":{es:"Francia",code:"FRA"},
+  "Germany":{es:"Alemania",code:"GER"},
+  "Ghana":{es:"Ghana",code:"GHA"},
+  "Haiti":{es:"Haití",code:"HAI"},
+  "Iran":{es:"Irán",code:"IRN"},
+  "Iraq":{es:"Irak",code:"IRQ"},
+  "Ivory Coast":{es:"Costa de Marfil",code:"CIV"},
+  "Japan":{es:"Japón",code:"JPN"},
+  "Jordan":{es:"Jordania",code:"JOR"},
+  "Mexico":{es:"México",code:"MEX"},
+  "Morocco":{es:"Marruecos",code:"MAR"},
+  "Netherlands":{es:"Países Bajos",code:"NED"},
+  "New Zealand":{es:"Nueva Zelanda",code:"NZL"},
+  "Norway":{es:"Noruega",code:"NOR"},
+  "Panama":{es:"Panamá",code:"PAN"},
+  "Paraguay":{es:"Paraguay",code:"PAR"},
+  "Portugal":{es:"Portugal",code:"POR"},
+  "Qatar":{es:"Catar",code:"QAT"},
+  "Saudi Arabia":{es:"Arabia Saudita",code:"KSA"},
+  "Scotland":{es:"Escocia",code:"SCO"},
+  "Senegal":{es:"Senegal",code:"SEN"},
+  "South Africa":{es:"Sudáfrica",code:"RSA"},
+  "South Korea":{es:"Corea del Sur",code:"KOR"},
+  "Spain":{es:"España",code:"ESP"},
+  "Sweden":{es:"Suecia",code:"SWE"},
+  "Switzerland":{es:"Suiza",code:"SUI"},
+  "Tunisia":{es:"Túnez",code:"TUN"},
+  "Turkey":{es:"Turquía",code:"TUR"},
+  "USA":{es:"Estados Unidos",code:"USA"},
+  "Uruguay":{es:"Uruguay",code:"URU"},
+  "Uzbekistan":{es:"Uzbekistán",code:"UZB"}
+};
+const pais = n => {
+  const p = PAISES[n];
+  if (!p) return n;
+  return `<span class="code">${p.code}</span> ${p.es}`;
+};
+const paisPlain = n => PAISES[n] ? PAISES[n].es : n;
+const flagOf = n => PAISES[n] ? PAISES[n].code : '???';
+
+const CITIES = [
+  {name:'Mexico City',country:'MEX · México',lat:19.43,lon:-99.13},
+  {name:'Guadalajara',country:'MEX · México',lat:20.66,lon:-103.35},
+  {name:'Monterrey',country:'MEX · México',lat:25.69,lon:-100.32},
+  {name:'Toronto',country:'🇨🇦 Canadá',lat:43.65,lon:-79.38},
+  {name:'Vancouver',country:'🇨🇦 Canadá',lat:49.28,lon:-123.12},
+  {name:'New York/New Jersey',country:'🇺🇸 USA',lat:40.81,lon:-74.07},
+  {name:'Los Angeles',country:'🇺🇸 USA',lat:33.95,lon:-118.34},
+  {name:'Dallas',country:'🇺🇸 USA',lat:32.75,lon:-97.09},
+  {name:'Houston',country:'🇺🇸 USA',lat:29.68,lon:-95.41},
+  {name:'Atlanta',country:'🇺🇸 USA',lat:33.76,lon:-84.40},
+  {name:'Seattle',country:'🇺🇸 USA',lat:47.60,lon:-122.33},
+  {name:'San Francisco Bay Area',country:'🇺🇸 USA',lat:37.40,lon:-121.97},
+  {name:'Boston',country:'🇺🇸 USA',lat:42.09,lon:-71.26},
+  {name:'Philadelphia',country:'🇺🇸 USA',lat:39.90,lon:-75.17},
+  {name:'Miami',country:'🇺🇸 USA',lat:25.96,lon:-80.24},
+  {name:'Kansas City',country:'🇺🇸 USA',lat:39.05,lon:-94.48}
+];
+
+const TEAM_META = {
+  "Spain":{coach:"Luis de la Fuente",conf:"UEFA",wc:"Campeón 2010 · Campeón 2026",note:"Invicto. Campeón en prórroga ante Argentina."},
+  "Argentina":{coach:"Lionel Scaloni",conf:"CONMEBOL",wc:"Campeón 1978, 1986, 2022 · Subcampeón 2026",note:"Camino a la final. Messi con 8 goles."},
+  "England":{coach:"Thomas Tuchel",conf:"UEFA",wc:"Campeón 1966 · 3er puesto 2026",note:"Bronce con goleada a Francia."},
+  "France":{coach:"Didier Deschamps",conf:"UEFA",wc:"Campeón 1998, 2018 · 4º 2026",note:"Mbappé goleador del torneo (10)."},
+  "Norway":{coach:"Ståle Solbakken",conf:"UEFA",wc:"Cuartos 2026",note:"Haaland imparable en fase de grupos."},
+  "Belgium":{coach:"Rudi Garcia",conf:"UEFA",wc:"Cuartos 2026",note:"Gran campaña hasta caer ante España."},
+  "Morocco":{coach:"Walid Regragui",conf:"CAF",wc:"4º 2022 · Cuartos 2026",note:"Otra gran defensa africana."},
+  "Switzerland":{coach:"Murat Yakin",conf:"UEFA",wc:"Cuartos 2026",note:"1º del Grupo B. Sólidos."},
+  "Mexico":{coach:"Javier Aguirre",conf:"CONCACAF",wc:"Octavos 2026",note:"Anfitrión. Pleno en grupos."},
+  "Brazil":{coach:"Carlo Ancelotti",conf:"CONMEBOL",wc:"5 títulos · Cuartos/Octavos 2026",note:"Vinícius y ataque brillante."},
+  "USA":{coach:"Mauricio Pochettino",conf:"CONCACAF",wc:"Octavos 2026",note:"Anfitrión. Buen torneo."},
+  "Portugal":{coach:"Roberto Martínez",conf:"UEFA",wc:"Octavos 2026",note:"Ronaldo anotó. Eliminados por España."},
+  "Colombia":{coach:"Néstor Lorenzo",conf:"CONMEBOL",wc:"Octavos 2026",note:"Sólidos hasta penales vs Suiza."},
+  "Canada":{coach:"Jesse Marsch",conf:"CONCACAF",wc:"Octavos 2026",note:"Anfitrión. 6-0 a Catar."},
+  "Egypt":{coach:"Hossam Hassan",conf:"CAF",wc:"Octavos 2026",note:"2º Grupo G. Gran papel."},
+  "Paraguay":{coach:"Gustavo Alfaro",conf:"CONMEBOL",wc:"Octavos 2026",note:"Eliminó a Alemania en penales."},
+  "Cape Verde":{coach:"Bubista",conf:"CAF",wc:"Dieciseisavos 2026",note:"Invictos en grupos. Sorpresa."},
+  "Germany":{coach:"Julian Nagelsmann",conf:"UEFA",wc:"Dieciseisavos 2026",note:"7-1 a Curazao. Cayó vs Paraguay."},
+  "Netherlands":{coach:"Ronald Koeman",conf:"UEFA",wc:"Dieciseisavos 2026",note:"Sólidos en grupos."},
+  "Japan":{coach:"Hajime Moriyasu",conf:"AFC",wc:"Dieciseisavos 2026",note:"Buen nivel asiático."},
+  "Algeria":{coach:"Vladimir Petković",conf:"CAF",wc:"Fase de grupos 2026",note:"Competitivos en su grupo."},
+  "Australia":{coach:"Tony Popovic",conf:"AFC",wc:"Varias participaciones · 2026",note:"Experiencia oceánico-asiática."},
+  "Austria":{coach:"Ralf Rangnick",conf:"UEFA",wc:"2026",note:"Organizados y físicos."},
+  "Bosnia & Herzegovina":{coach:"Sergej Barbarez",conf:"UEFA",wc:"2026",note:"Regreso a un Mundial."},
+  "Croatia":{coach:"Zlatko Dalić",conf:"UEFA",wc:"Finalista 2018 · 3º 2022 · 2026",note:"Siempre competitivos."},
+  "Curaçao":{coach:"Dick Advocaat",conf:"CONCACAF",wc:"Primera vez 2026",note:"Histórico debut mundialista."},
+  "Czech Republic":{coach:"Ivan Hašek",conf:"UEFA",wc:"2026",note:"Tradición europea."},
+  "DR Congo":{coach:"Sébastien Desabre",conf:"CAF",wc:"2026",note:"Físico y potencia africana."},
+  "Ecuador":{coach:"Sebastián Beccacece",conf:"CONMEBOL",wc:"Varias · 2026",note:"Sólidos en CONMEBOL."},
+  "Ghana":{coach:"Otto Addo",conf:"CAF",wc:"Varias · 2026",note:"Experiencia africana."},
+  "Haiti":{coach:"Sébastien Migné",conf:"CONCACAF",wc:"1974 · 2026",note:"Regreso histórico."},
+  "Iran":{coach:"Amir Ghalenoei",conf:"AFC",wc:"Varias · 2026",note:"Potencia de Asia."},
+  "Iraq":{coach:"Jesús Casas",conf:"AFC",wc:"1986 · 2026",note:"Regreso tras décadas."},
+  "Ivory Coast":{coach:"Emerse Faé",conf:"CAF",wc:"Varias · 2026",note:"Elefantes competitivos."},
+  "Jordan":{coach:"Hussein Ammouta",conf:"AFC",wc:"Primera vez 2026",note:"Debut mundialista histórico."},
+  "New Zealand":{coach:"Darren Bazeley",conf:"OFC",wc:"Varias · 2026",note:"Representante de Oceanía."},
+  "Panama":{coach:"Thomas Christiansen",conf:"CONCACAF",wc:"2018 · 2026",note:"Segunda participación."},
+  "Qatar":{coach:"Luis García",conf:"AFC",wc:"Anfitrión 2022 · 2026",note:"Experiencia reciente de Mundial."},
+  "Saudi Arabia":{coach:"Hervé Renard",conf:"AFC",wc:"Varias · 2026",note:"Ambición asiática."},
+  "Scotland":{coach:"Steve Clarke",conf:"UEFA",wc:"1998 · 2026",note:"Regreso de los Tartan Army."},
+  "Senegal":{coach:"Aliou Cissé",conf:"CAF",wc:"Cuartos 2002 · 2026",note:"Campeones de África experimentados."},
+  "South Africa":{coach:"Hugo Broos",conf:"CAF",wc:"Anfitrión 2010 · 2026",note:"Bafana Bafana de regreso."},
+  "South Korea":{coach:"Hong Myung-bo",conf:"AFC",wc:"4º 2002 · 2026",note:"Siempre presentes en Mundiales."},
+  "Sweden":{coach:"Jon Dahl Tomasson",conf:"UEFA",wc:"Finalista 1958 · 2026",note:"Regreso europeo."},
+  "Tunisia":{coach:"Sami Trabelsi",conf:"CAF",wc:"Varias · 2026",note:"Clásico africano."},
+  "Turkey":{coach:"Vincenzo Montella",conf:"UEFA",wc:"3º 2002 · 2026",note:"Ambición otomana."},
+  "Uruguay":{coach:"Marcelo Bielsa",conf:"CONMEBOL",wc:"Campeón 1930, 1950 · 2026",note:"Celeste con historia."},
+  "Uzbekistan":{coach:"Timur Kapadze",conf:"AFC",wc:"Primera vez 2026",note:"Debut histórico de Asia Central."}
+};
+
+let allMatches = [];
+let phase = 'groups';
+let groupFilter = '';
+
+function computeStandings() {
+  const groups = {};
+  allMatches.filter(m => m.group && m.score?.ft).forEach(m => {
+    const g = m.group;
+    if (!groups[g]) groups[g] = {};
+    [m.team1, m.team2].forEach(t => {
+      if (!groups[g][t]) groups[g][t] = {team:t,pj:0,g:0,e:0,p:0,gf:0,gc:0,pts:0};
+    });
+    const s1 = m.score.ft[0], s2 = m.score.ft[1];
+    const a = groups[g][m.team1], b = groups[g][m.team2];
+    a.pj++; b.pj++; a.gf+=s1; a.gc+=s2; b.gf+=s2; b.gc+=s1;
+    if (s1 > s2) { a.g++; a.pts+=3; b.p++; }
+    else if (s1 < s2) { b.g++; b.pts+=3; a.p++; }
+    else { a.e++; b.e++; a.pts++; b.pts++; }
+  });
+  Object.keys(groups).forEach(g => {
+    groups[g] = Object.values(groups[g]).sort((x,y) => {
+      if (y.pts !== x.pts) return y.pts - x.pts;
+      const dx = x.gf-x.gc, dy = y.gf-y.gc;
+      if (dy !== dx) return dy - dx;
+      return y.gf - x.gf;
+    });
+  });
+  return groups;
+}
+
+function getStage(team) {
+  const labels = {0:'Fase de grupos',1:'Dieciseisavos',2:'Octavos',3:'Cuartos',4:'Semifinal',5:'3er/4º',6:'Final',7:'Campeón'};
+  let best = 0;
+  // Champion / runner
+  if (team === 'Spain') return 'Campeón';
+  if (team === 'Argentina') return 'Subcampeón';
+  if (team === 'England') return '3er puesto';
+  if (team === 'France') return '4º puesto';
+  for (const m of allMatches) {
+    if (m.group) continue;
+    if (m.team1 !== team && m.team2 !== team) continue;
+    const r = (m.round||'').toLowerCase();
+    let st = 0;
+    if (r.includes('round of 32')) st = 1;
+    else if (r.includes('round of 16')) st = 2;
+    else if (r.includes('quarter')) st = 3;
+    else if (r.includes('semi')) st = 4;
+    else if (r.includes('third')) st = 5;
+    else if (r === 'final') st = 6;
+    best = Math.max(best, st);
+  }
+  return labels[best] || 'Fase de grupos';
+}
+
+function winnerOf(m) {
+  const sc = m.score;
+  if (!sc) return null;
+  if (sc.p) return sc.p[0] > sc.p[1] ? m.team1 : m.team2;
+  if (sc.et) return sc.et[0] > sc.et[1] ? m.team1 : m.team2;
+  if (sc.ft) {
+    if (sc.ft[0] > sc.ft[1]) return m.team1;
+    if (sc.ft[1] > sc.ft[0]) return m.team2;
+  }
+  return null;
+}
+
+function ronda(round) {
+  if (!round) return '';
+  const r = round.toLowerCase();
+  if (r.includes('matchday')) return 'Jornada ' + round.replace(/Matchday /i,'');
+  if (r.includes('round of 32')) return 'Dieciseisavos';
+  if (r.includes('round of 16')) return 'Octavos';
+  if (r.includes('quarter')) return 'Cuartos';
+  if (r.includes('semi')) return 'Semifinal';
+  if (r.includes('third')) return '3er puesto';
+  if (r === 'final') return 'Final';
+  return round;
+}
+
+function scoreStr(m) {
+  let s1 = m.score?.ft?.[0] ?? '–', s2 = m.score?.ft?.[1] ?? '–', extra = '';
+  if (m.score?.et) { s1 = m.score.et[0]; s2 = m.score.et[1]; extra = ' PR'; }
+  if (m.score?.p) extra += ` (${m.score.p[0]}-${m.score.p[1]} pen)`;
+  return { s1, s2, extra };
+}
+
+function matchHTML(m) {
+  const { s1, s2, extra } = scoreStr(m);
+  const g1 = (m.goals1||[]).map(g => {
+    let t = `${g.minute}' ${g.name}`;
+    if (g.penalty) t += ' (pen)';
+    if (g.owngoal) t += ' (ag)';
+    return t;
+  }).join('<br>') || '—';
+  const g2 = (m.goals2||[]).map(g => {
+    let t = `${g.minute}' ${g.name}`;
+    if (g.penalty) t += ' (pen)';
+    if (g.owngoal) t += ' (ag)';
+    return t;
+  }).join('<br>') || '—';
+  const badge = m.group
+    ? `<span class="badge">${m.group.replace('Group','Grupo')}</span>`
+    : `<span class="badge ko">${ronda(m.round)}</span>`;
+  return `<article class="match" tabindex="0">
+    <div class="match-top"><span>${m.date||''}</span>${badge}</div>
+    <div class="match-mid">
+      <div class="t">${pais(m.team1)}</div>
+      <div class="s">${s1}–${s2}${extra}</div>
+      <div class="t">${pais(m.team2)}</div>
+    </div>
+    <div class="match-bot"><span>📍 ${m.ground||''}</span><span>${ronda(m.round)}</span></div>
+    <div class="match-goals"><div class="goals-grid">
+      <div><h4>${pais(m.team1)}</h4>${g1}</div>
+      <div><h4>${pais(m.team2)}</h4>${g2}</div>
+    </div></div>
+  </article>`;
+}
+
+function tableHTML(g, rows, markThird) {
+  const label = g.replace('Group','Grupo');
+  return `<div class="table-wrap">
+    <h3>${label}</h3>
+    <table>
+      <thead><tr>
+        <th class="n">Pos</th><th>Equipo</th>
+        <th class="n">PJ</th><th class="n">G</th><th class="n">E</th><th class="n">P</th>
+        <th class="n">GF</th><th class="n">GC</th><th class="n">DG</th><th class="n">Pts</th>
+      </tr></thead>
+      <tbody>${rows.map((r,i) => {
+        const dg = r.gf - r.gc;
+        let cls = i < 2 ? 'ok' : (markThird && i === 2 ? 'third' : '');
+        return `<tr>
+          <td class="pos ${cls}">${i+1}</td>
+          <td class="team">${pais(r.team)}</td>
+          <td class="n">${r.pj}</td><td class="n">${r.g}</td><td class="n">${r.e}</td><td class="n">${r.p}</td>
+          <td class="n">${r.gf}</td><td class="n">${r.gc}</td>
+          <td class="n">${dg>0?'+':''}${dg}</td>
+          <td class="pts">${r.pts}</td>
+        </tr>`;
+      }).join('')}</tbody>
+    </table>
+  </div>`;
+}
+
+function renderTablas() {
+  const st = computeStandings();
+  const names = Object.keys(st).sort();
+  const pills = document.getElementById('groupPills');
+  pills.innerHTML = names.map((g,i) =>
+    `<button type="button" class="pill ${i===0?'on':''}" data-g="${g}">${g.replace('Group','Grupo')}</button>`
+  ).join('');
+  const show = g => {
+    document.getElementById('groupDetail').innerHTML = tableHTML(g, st[g], true);
+  };
+  if (names[0]) show(names[0]);
+  pills.querySelectorAll('.pill').forEach(btn => {
+    btn.addEventListener('click', () => {
+      pills.querySelectorAll('.pill').forEach(b => b.classList.remove('on'));
+      btn.classList.add('on');
+      show(btn.dataset.g);
+    });
+  });
+
+  // Best thirds
+  const thirds = names.map(g => {
+    const rows = st[g];
+    if (!rows || rows.length < 3) return null;
+    return { group: g, ...rows[2] };
+  }).filter(Boolean).sort((a,b) => {
+    if (b.pts !== a.pts) return b.pts - a.pts;
+    const da = a.gf-a.gc, db = b.gf-b.gc;
+    if (db !== da) return db - da;
+    return b.gf - a.gf;
+  });
+
+  document.getElementById('thirdsTable').innerHTML = `<div class="table-wrap">
+    <h3>Clasificación de terceros</h3>
+    <table>
+      <thead><tr>
+        <th class="n">#</th><th>Equipo</th><th>Grupo</th>
+        <th class="n">Pts</th><th class="n">DG</th><th class="n">GF</th><th class="n">Estado</th>
+      </tr></thead>
+      <tbody>${thirds.map((r,i) => {
+        const dg = r.gf - r.gc;
+        const ok = i < 8;
+        return `<tr>
+          <td class="pos ${ok?'ok':''}">${i+1}</td>
+          <td class="team">${pais(r.team)}</td>
+          <td>${r.group.replace('Group','Grupo')}</td>
+          <td class="pts">${r.pts}</td>
+          <td class="n">${dg>0?'+':''}${dg}</td>
+          <td class="n">${r.gf}</td>
+          <td class="n" style="color:${ok?'var(--green)':'var(--muted)'}">${ok?'Clasificado':'Eliminado'}</td>
+        </tr>`;
+      }).join('')}</tbody>
+    </table>
+  </div>`;
+}
+
+function inPhase(m) {
+  const r = (m.round||'').toLowerCase();
+  if (phase === 'groups') return !!m.group;
+  if (phase === 'r32') return r.includes('round of 32');
+  if (phase === 'r16') return r.includes('round of 16');
+  if (phase === 'qf') return r.includes('quarter');
+  if (phase === 'sf') return r.includes('semi');
+  if (phase === 'third') return r.includes('third');
+  if (phase === 'final') return r === 'final';
+  return true;
+}
+
+function renderPartidos() {
+  const sub = document.getElementById('subGroupPills');
+  if (phase === 'groups') {
+    const groups = [...new Set(allMatches.map(m => m.group).filter(Boolean))].sort();
+    sub.style.display = 'flex';
+    if (!groupFilter && groups[0]) groupFilter = groups[0];
+    sub.innerHTML = groups.map(g => `<button type="button" class="pill ${groupFilter===g?'on':''}" data-g="${g}">${g.replace('Group','Grupo')}</button>`).join('');
+    sub.querySelectorAll('.pill').forEach(btn => {
+      btn.addEventListener('click', () => {
+        groupFilter = btn.dataset.g || '';
+        renderPartidos();
+      });
+    });
+  } else {
+    sub.style.display = 'none';
+    sub.innerHTML = '';
+  }
+
+  let list = allMatches.filter(m => {
+    if (!inPhase(m)) return false;
+    if (phase === 'groups' && groupFilter && m.group !== groupFilter) return false;
+    return true;
+  }).sort((a,b) => (a.date||'').localeCompare(b.date||'') || (a.num||0)-(b.num||0));
+
+  const box = document.getElementById('matchesBox');
+  if (!list.length) {
+    box.innerHTML = '<div class="empty">No hay partidos en esta fase.</div>';
+    return;
+  }
+
+  if (phase === 'groups') {
+    const st = computeStandings();
+    const gs = groupFilter ? [groupFilter] : [...new Set(list.map(m => m.group))].sort();
+    box.innerHTML = gs.map(g => {
+      const rows = st[g] || [];
+      const ms = list.filter(m => m.group === g);
+      return `<div class="block">
+        ${tableHTML(g, rows, true)}
+        <div class="block-title">Partidos del ${g.replace('Group','grupo')}</div>
+        <div class="matches">${ms.map(matchHTML).join('')}</div>
+      </div>`;
+    }).join('');
+  } else {
+    const title = {
+      r32:'Dieciseisavos de final', r16:'Octavos de final', qf:'Cuartos de final',
+      sf:'Semifinales', third:'Partido por el 3er puesto', final:'Final'
+    }[phase] || '';
+    box.innerHTML = `<div class="block">
+      <div class="block-title">${title}</div>
+      <div class="matches">${list.map(matchHTML).join('')}</div>
+    </div>`;
+  }
+
+  box.querySelectorAll('.match').forEach(card => {
+    card.addEventListener('click', () => card.classList.toggle('open'));
+  });
+}
+
+function bMatch(m) {
+  if (!m) return '<div class="b-match" style="opacity:0.4">—</div>';
+  const { s1, s2, extra } = scoreStr(m);
+  const w = winnerOf(m);
+  const c1 = w === m.team1 ? 'win' : (w ? 'lose' : '');
+  const c2 = w === m.team2 ? 'win' : (w ? 'lose' : '');
+  return `<div class="b-match ${m.round==='Final'?'b-final':''}" data-num="${m.num||''}">
+    <div class="bt ${c1}"><span>${flagOf(m.team1)} ${paisPlain(m.team1)}</span><span class="sc">${s1}</span></div>
+    <div class="bt ${c2}"><span>${flagOf(m.team2)} ${paisPlain(m.team2)}</span><span class="sc">${s2}</span></div>
+    ${extra ? `<div style="text-align:center;font-size:0.65rem;color:var(--muted);margin-top:0.15rem">${extra.trim()}</div>` : ''}
+  </div>`;
+}
+
+function renderBracket() {
+  const byRound = {
+    r32: allMatches.filter(m => (m.round||'').toLowerCase().includes('round of 32')).sort((a,b)=>(a.num||0)-(b.num||0)),
+    r16: allMatches.filter(m => (m.round||'').toLowerCase().includes('round of 16')).sort((a,b)=>(a.num||0)-(b.num||0)),
+    qf: allMatches.filter(m => (m.round||'').toLowerCase().includes('quarter')).sort((a,b)=>(a.num||0)-(b.num||0)),
+    sf: allMatches.filter(m => (m.round||'').toLowerCase().includes('semi')).sort((a,b)=>(a.num||0)-(b.num||0)),
+    third: allMatches.filter(m => (m.round||'').toLowerCase().includes('third')),
+    final: allMatches.filter(m => (m.round||'').toLowerCase() === 'final')
+  };
+
+  function bMatch(m, isFinal) {
+    if (!m) return '<div class="b-match" style="opacity:0.35;min-height:52px"></div>';
+    const { s1, s2, extra } = scoreStr(m);
+    const w = winnerOf(m);
+    const c1 = w === m.team1 ? 'win' : (w ? 'lose' : '');
+    const c2 = w === m.team2 ? 'win' : (w ? 'lose' : '');
+    const champ = isFinal && w === 'Spain' ? '<div class="b-champ-badge">🏆 CAMPEÓN</div>' : '';
+    return `<div class="b-match ${isFinal?'b-final':''}" title="${ronda(m.round)} · ${m.date||''} · ${m.ground||''}">
+      <div class="bt ${c1}"><span>${flagOf(m.team1)} ${paisPlain(m.team1)}</span><span class="sc">${s1}</span></div>
+      <div class="bt ${c2}"><span>${flagOf(m.team2)} ${paisPlain(m.team2)}</span><span class="sc">${s2}</span></div>
+      ${extra ? `<div style="text-align:center;font-size:0.62rem;color:var(--muted);margin-top:0.12rem">${extra.trim()}</div>` : ''}
+      ${champ}
+    </div>`;
+  }
+
+  const box = document.getElementById('bracketBox');
+  box.innerHTML = `<div class="bracket">
+    <div class="bracket-col"><h4>Dieciseisavos (16)</h4>${byRound.r32.map(m => bMatch(m)).join('')}</div>
+    <div class="bracket-col"><h4>Octavos (8)</h4>${byRound.r16.map(m => bMatch(m)).join('')}</div>
+    <div class="bracket-col"><h4>Cuartos (4)</h4>${byRound.qf.map(m => bMatch(m)).join('')}</div>
+    <div class="bracket-col"><h4>Semifinales</h4>${byRound.sf.map(m => bMatch(m)).join('')}</div>
+    <div class="bracket-col col-final">
+      <h4>Final</h4>
+      ${byRound.final.map(m => bMatch(m, true)).join('')}
+      <h4 style="margin-top:1rem">3er puesto</h4>
+      ${byRound.third.map(m => bMatch(m)).join('')}
+    </div>
+  </div>
+  <p style="color:var(--muted);font-size:0.78rem;margin-top:0.85rem;text-align:center">
+    Verde = ganador · 🏆 España campeón · Deslizá horizontalmente en móvil · Tocá un partido para ver sede y fecha
+  </p>`;
+}
+
+function renderStats() {
+  const scorers = {};
+  const teamGF = {};
+  const teamGA = {};
+  allMatches.forEach(m => {
+    if (!m.score?.ft) return;
+    teamGF[m.team1] = (teamGF[m.team1]||0) + m.score.ft[0];
+    teamGF[m.team2] = (teamGF[m.team2]||0) + m.score.ft[1];
+    teamGA[m.team1] = (teamGA[m.team1]||0) + m.score.ft[1];
+    teamGA[m.team2] = (teamGA[m.team2]||0) + m.score.ft[0];
+    // count ET goals too for display consistency - already in goals arrays
+    (m.goals1||[]).forEach(g => {
+      if (g.owngoal) return;
+      scorers[g.name] = scorers[g.name] || {name:g.name, goals:0, team:m.team1};
+      scorers[g.name].goals++;
+    });
+    (m.goals2||[]).forEach(g => {
+      if (g.owngoal) return;
+      scorers[g.name] = scorers[g.name] || {name:g.name, goals:0, team:m.team2};
+      scorers[g.name].goals++;
+    });
+  });
+
+  const topScorers = Object.values(scorers).sort((a,b)=>b.goals-a.goals).slice(0,12);
+  const topTeamsGF = Object.entries(teamGF).sort((a,b)=>b[1]-a[1]).slice(0,10);
+  const bestDef = Object.entries(teamGA).sort((a,b)=>a[1]-b[1]).slice(0,10);
+
+  const rankHTML = (title, items, valFn, nameFn) => `
+    <div class="rank-list"><h3>${title}</h3>
+    ${items.map((it,i) => `
+      <div class="rank-item">
+        <span class="rank-num ${i<3?'top':''}">${i+1}</span>
+        <span class="rank-name">${nameFn(it)}</span>
+        <span class="rank-val">${valFn(it)}</span>
+      </div>`).join('')}
+    </div>`;
+
+  document.getElementById('statsBox').innerHTML =
+    rankHTML('⚽ Goleadores', topScorers, x=>x.goals, x=>`${flagOf(x.team)} ${x.name}`) +
+    rankHTML('🔥 Más goles a favor', topTeamsGF, x=>x[1], x=>pais(x[0])) +
+    rankHTML('🛡️ Menos goles en contra', bestDef, x=>x[1], x=>pais(x[0]));
+}
+
+function renderTeams(filter='') {
+  const allTeams = [...new Set(allMatches.flatMap(m => [m.team1, m.team2]))].sort((a,b)=>paisPlain(a).localeCompare(paisPlain(b),'es'));
+  const q = filter.toLowerCase().trim();
+  const list = q ? allTeams.filter(t => paisPlain(t).toLowerCase().includes(q) || t.toLowerCase().includes(q)) : allTeams;
+
+  // team stats
+  const st = computeStandings();
+  const groupOf = {};
+  Object.entries(st).forEach(([g, rows]) => rows.forEach(r => { groupOf[r.team] = g; }));
+
+  const teamStats = {};
+  allMatches.forEach(m => {
+    if (!m.score?.ft) return;
+    [m.team1, m.team2].forEach((t,i) => {
+      if (!teamStats[t]) teamStats[t] = {pj:0,gf:0,gc:0};
+      teamStats[t].pj++;
+      teamStats[t].gf += m.score.ft[i];
+      teamStats[t].gc += m.score.ft[1-i];
+    });
+  });
+
+  document.getElementById('teamsGrid').innerHTML = list.map(t => {
+    const meta = TEAM_META[t] || {};
+    const stage = getStage(t);
+    const ts = teamStats[t] || {pj:0,gf:0,gc:0};
+    const g = groupOf[t] || '';
+    return `<div class="team-card" data-team>
+      <div class="team-card-top">
+        <div class="team-flag">${flagOf(t)}</div>
+        <div>
+          <h3>${paisPlain(t)}</h3>
+          <div class="team-stage">${stage}</div>
+        </div>
+      </div>
+      <div class="team-meta">${g ? g.replace('Group','Grupo')+' · ' : ''}${ts.pj} PJ · ${ts.gf} GF · ${ts.gc} GC</div>
+      <div class="team-detail">
+        <p><strong>Entrenador:</strong> ${meta.coach || '—'}</p>
+        <p><strong>Confederación:</strong> ${meta.conf || '—'}</p>
+        <p><strong>Historial Mundial:</strong> ${meta.wc || 'Primera participación o sin datos'}</p>
+        <p><strong>En 2026:</strong> ${meta.note || stage + '. ' + ts.gf + ' goles a favor en ' + ts.pj + ' partidos.'}</p>
+      </div>
+    </div>`;
+  }).join('');
+
+  document.querySelectorAll('[data-team]').forEach(card => {
+    card.addEventListener('click', () => {
+      const was = card.classList.contains('open');
+      document.querySelectorAll('[data-team].open').forEach(c => c.classList.remove('open'));
+      if (!was) card.classList.add('open');
+    });
+  });
+}
+
+async function loadWeather() {
+  const grid = document.getElementById('citiesGrid');
+  const WMO = {0:'☀️',1:'🌤️',2:'⛅',3:'☁️',45:'🌫️',61:'🌧️',63:'🌧️',80:'🌦️',95:'⛈️'};
+  grid.innerHTML = CITIES.map(c => `
+    <div class="city">
+      <h4>${c.name}</h4>
+      <div class="co">${c.country}</div>
+      <div class="w" id="w-${c.name.replace(/[\s\/]/g,'-')}"><span class="wd">Cargando…</span></div>
+    </div>`).join('');
+  await Promise.all(CITIES.map(async c => {
+    try {
+      const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${c.lat}&longitude=${c.lon}&current=temperature_2m,weather_code,wind_speed_10m&timezone=auto`);
+      const d = await res.json();
+      const cur = d.current;
+      const el = document.getElementById('w-' + c.name.replace(/[\s\/]/g,'-'));
+      if (el) el.innerHTML = `<span class="wi">${WMO[cur.weather_code]||'🌡️'}</span>
+        <div><div class="wt">${Math.round(cur.temperature_2m)}°C</div>
+        <div class="wd">Viento ${Math.round(cur.wind_speed_10m)} km/h</div></div>`;
+    } catch {
+      const el = document.getElementById('w-' + c.name.replace(/[\s\/]/g,'-'));
+      if (el) el.innerHTML = '<span class="wd">No disponible</span>';
+    }
+  }));
+}
+
+
+const STADIUMS = [{"fifa": "Mexico City Stadium", "real": "Estadio Azteca / Banorte", "city": "Mexico City", "country": "MEX · México", "cap": 80824, "surface": "Césped natural", "roof": "Abierto", "note": "Único estadio con 3 Mundiales (1970, 1986, 2026). Sede del partido inaugural.", "lat": 19.3, "lon": -99.15, "matches": 5}, {"fifa": "New York New Jersey Stadium", "real": "MetLife Stadium", "city": "East Rutherford", "country": "USA", "cap": 80663, "surface": "Césped natural (instalado para el Mundial)", "roof": "Abierto", "note": "Sede de la Final. Casa de Giants y Jets (NFL).", "lat": 40.81, "lon": -74.07, "matches": 8}, {"fifa": "Dallas Stadium", "real": "AT&T Stadium", "city": "Arlington (Dallas)", "country": "USA", "cap": 70649, "surface": "Césped artificial / natural para WC", "roof": "Retráctil · climatizado", "note": "Más partidos del torneo (9). Semifinal España–Francia.", "lat": 32.75, "lon": -97.09, "matches": 9}, {"fifa": "Los Angeles Stadium", "real": "SoFi Stadium", "city": "Inglewood (LA)", "country": "USA", "cap": 70492, "surface": "Césped artificial", "roof": "Cubierta translúcida", "note": "Uno de los más modernos. Cuartos de final.", "lat": 33.95, "lon": -118.34, "matches": 8}, {"fifa": "Kansas City Stadium", "real": "Arrowhead Stadium", "city": "Kansas City", "country": "USA", "cap": 69045, "surface": "Césped natural", "roof": "Abierto", "note": "Casa de los Chiefs. Cuartos Argentina–Suiza.", "lat": 39.05, "lon": -94.48, "matches": 6}, {"fifa": "San Francisco Bay Area Stadium", "real": "Levi's Stadium", "city": "Santa Clara", "country": "USA", "cap": 68827, "surface": "Césped natural", "roof": "Abierto", "note": "Bay Area. Fase de grupos y R32.", "lat": 37.4, "lon": -121.97, "matches": 6}, {"fifa": "Houston Stadium", "real": "NRG Stadium", "city": "Houston", "country": "USA", "cap": 68777, "surface": "Césped artificial", "roof": "Retráctil", "note": "Climatizado. Octavos y grupos.", "lat": 29.68, "lon": -95.41, "matches": 7}, {"fifa": "Philadelphia Stadium", "real": "Lincoln Financial Field", "city": "Philadelphia", "country": "USA", "cap": 68324, "surface": "Césped natural", "roof": "Abierto", "note": "Casa de los Eagles. Octavos Francia–Paraguay.", "lat": 39.9, "lon": -75.17, "matches": 6}, {"fifa": "Atlanta Stadium", "real": "Mercedes-Benz Stadium", "city": "Atlanta", "country": "USA", "cap": 68239, "surface": "Césped artificial", "roof": "Retráctil", "note": "Semifinal Inglaterra–Argentina.", "lat": 33.76, "lon": -84.4, "matches": 8}, {"fifa": "Seattle Stadium", "real": "Lumen Field", "city": "Seattle", "country": "USA", "cap": 66925, "surface": "Césped artificial", "roof": "Parcial", "note": "Atmosfera intensa. Octavos.", "lat": 47.6, "lon": -122.33, "matches": 6}, {"fifa": "Miami Stadium", "real": "Hard Rock Stadium", "city": "Miami Gardens", "country": "USA", "cap": 64478, "surface": "Césped natural", "roof": "Cubierta parcial", "note": "Partido por el 3er puesto (Inglaterra 6-4 Francia).", "lat": 25.96, "lon": -80.24, "matches": 7}, {"fifa": "Boston Stadium", "real": "Gillette Stadium", "city": "Foxborough", "country": "USA", "cap": 64146, "surface": "Césped artificial", "roof": "Abierto", "note": "Cuartos Francia–Marruecos.", "lat": 42.09, "lon": -71.26, "matches": 7}, {"fifa": "BC Place Vancouver", "real": "BC Place", "city": "Vancouver", "country": "CAN · Canadá", "cap": 52497, "surface": "Césped híbrido", "roof": "Retráctil", "note": "Único techo retráctil en Canadá. Octavos.", "lat": 49.28, "lon": -123.12, "matches": 7}, {"fifa": "Monterrey Stadium", "real": "Estadio BBVA", "city": "Guadalupe (Monterrey)", "country": "MEX · México", "cap": 51243, "surface": "Césped natural", "roof": "Abierto", "note": "Diseño moderno. Dieciseisavos.", "lat": 25.67, "lon": -100.24, "matches": 4}, {"fifa": "Guadalajara Stadium", "real": "Estadio Akron", "city": "Zapopan (Guadalajara)", "country": "MEX · México", "cap": 45664, "surface": "Césped natural", "roof": "Abierto", "note": "Forma de volcán. Solo fase de grupos.", "lat": 20.68, "lon": -103.46, "matches": 4}, {"fifa": "Toronto Stadium", "real": "BMO Field", "city": "Toronto", "country": "CAN · Canadá", "cap": 43036, "surface": "Césped natural", "roof": "Abierto", "note": "Estadio más pequeño del Mundial. R32.", "lat": 43.63, "lon": -79.42, "matches": 6}];
+
+function renderVenues() {
+  const grid = document.getElementById('venuesGrid');
+  if (!grid) return;
+  grid.innerHTML = STADIUMS.map(s => `
+    <div class="venue-card">
+      <div class="venue-head">
+        <h3>${s.fifa}</h3>
+        <div class="real">${s.real}</div>
+        <div class="co">${s.country} · ${s.city}</div>
+      </div>
+      <div class="venue-body">
+        <div class="venue-stats">
+          <div class="venue-stat"><strong>${s.cap.toLocaleString('es')}</strong><span>Capacidad</span></div>
+          <div class="venue-stat"><strong>${s.matches}</strong><span>Partidos</span></div>
+          <div class="venue-stat"><strong>${s.surface.includes('natural')?'🌿':'⚙️'}</strong><span>Césped</span></div>
+          <div class="venue-stat"><strong>${s.roof.includes('Retráctil')||s.roof.includes('Cubierta')?'🏟️':'☀️'}</strong><span>Techo</span></div>
+        </div>
+        <p class="venue-note">${s.note}</p>
+        <div class="venue-tags">
+          <span class="venue-tag">${s.surface}</span>
+          <span class="venue-tag">${s.roof}</span>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function hashStr(s) {
+  let h = 0;
+  for (let i = 0; i < s.length; i++) h = ((h << 5) - h) + s.charCodeAt(i) | 0;
+  return Math.abs(h);
+}
+
+function fakeAdvanced(m) {
+  // Deterministic "stats" from match id for comparator
+  const id = (m.num || 0) + (m.date || '') + m.team1 + m.team2;
+  const h = hashStr(id);
+  const s1 = m.score?.ft?.[0] ?? 0, s2 = m.score?.ft?.[1] ?? 0;
+  const total = Math.max(s1 + s2, 1);
+  // possession biased by goals but not extreme
+  let poss1 = 42 + (h % 17);
+  if (s1 > s2) poss1 = Math.min(62, poss1 + 6);
+  if (s2 > s1) poss1 = Math.max(38, poss1 - 6);
+  const poss2 = 100 - poss1;
+  const xg1 = +(s1 * 0.85 + ((h % 10) / 10) * 0.9 + 0.3).toFixed(2);
+  const xg2 = +(s2 * 0.85 + (((h >> 3) % 10) / 10) * 0.9 + 0.3).toFixed(2);
+  const shots1 = s1 * 3 + 4 + (h % 6);
+  const shots2 = s2 * 3 + 4 + ((h >> 2) % 6);
+  const sot1 = Math.max(s1, Math.floor(shots1 * 0.4));
+  const sot2 = Math.max(s2, Math.floor(shots2 * 0.4));
+  const passes1 = 320 + (h % 180);
+  const passes2 = 320 + ((h >> 4) % 180);
+  const key1 = 3 + (h % 8) + s1;
+  const key2 = 3 + ((h >> 5) % 8) + s2;
+  return { poss1, poss2, xg1, xg2, shots1, shots2, sot1, sot2, passes1, passes2, key1, key2 };
+}
+
+function matchLabel(m) {
+  const { s1, s2, extra } = scoreStr(m);
+  return `${paisPlain(m.team1)} ${s1}–${s2}${extra} ${paisPlain(m.team2)} · ${ronda(m.round)} (${m.date||''})`;
+}
+
+
+function teamPower(team) {
+  // Score based on tournament performance
+  const stageScore = {
+    'Campeón': 100, 'Subcampeón': 92, '3er puesto': 85, '4º puesto': 80,
+    'Cuartos': 70, 'Octavos': 55, 'Dieciseisavos': 40, 'Fase de grupos': 25
+  };
+  const stage = getStage(team);
+  let base = stageScore[stage] || 30;
+  // goals for/against from matches
+  let gf = 0, gc = 0, wins = 0, pj = 0;
+  allMatches.forEach(m => {
+    if (!m.score?.ft) return;
+    if (m.team1 === team) {
+      gf += m.score.ft[0]; gc += m.score.ft[1]; pj++;
+      if (m.score.ft[0] > m.score.ft[1]) wins++;
+      else if (m.score.et && m.score.et[0] > m.score.et[1]) wins++;
+      else if (m.score.p && m.score.p[0] > m.score.p[1]) wins++;
+    } else if (m.team2 === team) {
+      gf += m.score.ft[1]; gc += m.score.ft[0]; pj++;
+      if (m.score.ft[1] > m.score.ft[0]) wins++;
+      else if (m.score.et && m.score.et[1] > m.score.et[0]) wins++;
+      else if (m.score.p && m.score.p[1] > m.score.p[0]) wins++;
+    }
+  });
+  const gd = gf - gc;
+  base += Math.min(15, Math.max(-10, gd));
+  base += Math.min(10, wins * 1.5);
+  return { power: Math.round(base), stage, gf, gc, gd, wins, pj };
+}
+
+function setupComparator() {
+  const selA = document.getElementById('cmpA');
+  const selB = document.getElementById('cmpB');
+  if (!selA || !selB) return;
+  const teams = [...new Set(allMatches.flatMap(m => [m.team1, m.team2]))]
+    .sort((a,b) => paisPlain(a).localeCompare(paisPlain(b), 'es'));
+  const opts = teams.map(t => `<option value="${t}">${PAISES[t]?.code || ''} ${paisPlain(t)}</option>`).join('');
+  selA.innerHTML = '<option value="">Selección A…</option>' + opts;
+  selB.innerHTML = '<option value="">Selección B…</option>' + opts;
+
+  const update = () => {
+    const ta = selA.value, tb = selB.value;
+    const elA = document.getElementById('cmpResultA');
+    const elB = document.getElementById('cmpResultB');
+    const bars = document.getElementById('cmpBars');
+    if (!ta || !tb) {
+      elA.innerHTML = ''; elB.innerHTML = ''; bars.innerHTML = '';
+      return;
+    }
+    if (ta === tb) {
+      bars.innerHTML = '<div class="empty">Elegí dos selecciones distintas.</div>';
+      return;
+    }
+    const pa = teamPower(ta), pb = teamPower(tb);
+    elA.innerHTML = `<h4>${pais(ta)}</h4>
+      <div class="compare-score">${pa.power}</div>
+      <p style="font-size:0.8rem;color:var(--muted);text-align:center">${pa.stage} · ${pa.wins}G en ${pa.pj} PJ · DG ${pa.gd>0?'+':''}${pa.gd}</p>`;
+    elB.innerHTML = `<h4>${pais(tb)}</h4>
+      <div class="compare-score">${pb.power}</div>
+      <p style="font-size:0.8rem;color:var(--muted);text-align:center">${pb.stage} · ${pb.wins}G en ${pb.pj} PJ · DG ${pb.gd>0?'+':''}${pb.gd}</p>`;
+
+    const winner = pa.power >= pb.power ? ta : tb;
+    const loser = winner === ta ? tb : ta;
+    const wp = winner === ta ? pa : pb;
+    const lp = winner === ta ? pb : pa;
+    const diff = Math.abs(pa.power - pb.power);
+
+    let why = '';
+    if (diff < 5) {
+      why = `Sería un partido muy parejo. ${paisPlain(winner)} tiene una leve ventaja por su rendimiento en el Mundial (${wp.stage}), pero ${paisPlain(loser)} podría sorprender.`;
+    } else if (diff < 15) {
+      why = `${paisPlain(winner)} debería imponerse por su mejor campaña en 2026 (${wp.stage} vs ${lp.stage}), mejor diferencia de gol (${wp.gd>0?'+':''}${wp.gd} vs ${lp.gd>0?'+':''}${lp.gd}) y más victorias (${wp.wins} vs ${lp.wins}).`;
+    } else {
+      why = `${paisPlain(winner)} es claro favorito. Llegó a ${wp.stage} con un nivel superior, ${wp.wins} victorias y una diferencia de gol de ${wp.gd>0?'+':''}${wp.gd}. ${paisPlain(loser)} (${lp.stage}) tendría pocas chances en un cruce directo.`;
+    }
+
+    // Head to head if they played
+    let h2h = '';
+    const direct = allMatches.filter(m =>
+      (m.team1 === ta && m.team2 === tb) || (m.team1 === tb && m.team2 === ta)
+    );
+    if (direct.length) {
+      h2h = '<p style="margin-top:0.75rem;font-size:0.85rem"><strong>Cruce real en el Mundial:</strong> ' +
+        direct.map(m => {
+          const {s1,s2,extra} = scoreStr(m);
+          return `${paisPlain(m.team1)} ${s1}–${s2}${extra} ${paisPlain(m.team2)} (${ronda(m.round)})`;
+        }).join(' · ') + '</p>';
+    }
+
+    bars.innerHTML = `<div class="table-wrap" style="padding:1.25rem">
+      <h3 style="color:var(--gold);margin-bottom:0.6rem">🏆 Ganaría: ${pais(winner)}</h3>
+      <p style="font-size:0.92rem;line-height:1.5;color:var(--text)">${why}</p>
+      ${h2h}
+      <div class="stat-bars" style="margin-top:1rem">
+        ${[['Poder', pa.power, pb.power],['Goles a favor', pa.gf, pb.gf],['Goles en contra', pa.gc, pb.gc],['Victorias', pa.wins, pb.wins]].map(([label,v1,v2]) => {
+          const t = (+v1)+(+v2)||1;
+          const p1 = (+v1/t)*100, p2 = (+v2/t)*100;
+          return `<div class="stat-bar-row">
+            <div class="stat-bar-label"><span>${v1}</span><span>${label}</span><span>${v2}</span></div>
+            <div class="stat-bar-track">
+              <div class="stat-bar-l" style="width:${p1}%"></div>
+              <div class="stat-bar-r" style="width:${p2}%"></div>
+            </div>
+          </div>`;
+        }).join('')}
+      </div>
+      <p style="font-size:0.72rem;color:var(--muted);margin-top:0.75rem">Basado en fase alcanzada, victorias y diferencia de gol en el Mundial 2026.</p>
+    </div>`;
+  };
+  selA.onchange = update;
+  selB.onchange = update;
+}
+
+// Squads for cancha (notable players per team from tournament)
+const CANCHA_SQUADS = {
+  "Spain":["Unai Simón","Carvajal","Le Normand","Aymeric Laporte","Grimaldo","Pedri","Fabián Ruiz","Mikel Merino","Lamine Yamal","Ferran Torres","Mikel Oyarzabal","Álex Baena","Nico Williams","Dani Olmo"],
+  "Argentina":["Emiliano Martínez","Molina","Cristian Romero","Lisandro Martínez","Tagliafico","De Paul","Enzo Fernández","Mac Allister","Messi","Álvarez","Lautaro Martínez","Di María","Paredes","Otamendi"],
+  "England":["Pickford","Walker","Stones","Konsa","Shaw","Rice","Bellingham","Saka","Foden","Kane","Gordon","Rashford","Grealish","Maguire"],
+  "France":["Maignan","Koundé","Upamecano","Saliba","Theo Hernández","Tchouaméni","Camavinga","Dembélé","Mbappé","Barcola","Griezmann","Rabiot","Konaté"],
+  "Brazil":["Alisson","Danilo","Marquinhos","Militão","Carlos","Casemiro","Bruno Guimarães","Vinícius Jr.","Rodrygo","Richarlison","Martinelli","Endrick","Raphinha"],
+  "Germany":["Neuer","Kimmich","Rüdiger","Schlotterbeck","Raum","Gündoğan","Musiala","Sané","Havertz","Undav","Wirtz","Gnabry"],
+  "Portugal":["Costa","Cancelo","Dias","António Silva","Nuno Mendes","João Neves","B. Fernandes","Ronaldo","Leão","Ramos","Vitinha","Palhinha"],
+  "Netherlands":["Verbruggen","Dumfries","Van Dijk","De Ligt","Ake","Reijnders","F. de Jong","Gakpo","Simons","Brobbey","Frimpong","Summerville"],
+  "Norway":["Nyland","Pedersen","Østigard","Ajer","Meling","Berge","Aursnes","Nusa","Haaland","Sørloth","Ødegaard","Schjelderup"],
+  "Mexico":["Ochoa","Sanchez","Montes","Araujo","Gallardo","Edson Álvarez","Romo","Lainez","Jiménez","Quiñones","Pineda","Vega"],
+  "USA":["Turner","Dest","Richards","Zimmerman","Robinson","Adams","McKennie","Reyna","Pulisic","Balogun","Weah","Tillman"],
+  "Morocco":["Bounou","Hakimi","Aguerd","Saïss","Mazraoui","Amrabat","Ounahi","Ziyech","En-Nesyri","Saibari","Rahimi","Adli"],
+  "Belgium":["Casteels","Castagne","Theate","Faes","Carrasco","Onana","Tielemans","De Bruyne","Doku","Lukaku","De Ketelaere","Trossard"],
+  "Switzerland":["Sommer","Widmer","Akanji","Elvedi","Rodriguez","Xhaka","Freuler","Vargas","Embolo","Ndoye","Shaqiri","Manzambi"],
+  "Colombia":["Vargas","Muñoz","Lucumí","Mina","Mojica","Ríos","Arias","Díaz","Córdoba","Borja","James","Carrascal"],
+  "Senegal":["Mendy","Sabaly","Koulibaly","Diallo","Ballo-Touré","Gueye","Sarr","Mané","Dia","Ndiaye","Diarra","Pape Gueye"]
+};
+
+const PITCH_POS = [
+  {id:'gk', label:'ARQ', x:8, y:50},
+  {id:'df1', label:'LI', x:25, y:18},
+  {id:'df2', label:'DF', x:22, y:38},
+  {id:'df3', label:'DF', x:22, y:62},
+  {id:'df4', label:'LD', x:25, y:82},
+  {id:'mf1', label:'MC', x:45, y:28},
+  {id:'mf2', label:'MC', x:48, y:50},
+  {id:'mf3', label:'MC', x:45, y:72},
+  {id:'fw1', label:'EI', x:72, y:22},
+  {id:'fw2', label:'DC', x:78, y:50},
+  {id:'fw3', label:'ED', x:72, y:78}
+];
+
+function setupCancha() {
+  const pitch = document.getElementById('pitch');
+  const teamSel = document.getElementById('canchaTeam');
+  const pick = document.getElementById('playerPick');
+  const hint = document.getElementById('canchaHint');
+  const analisis = document.getElementById('canchaAnalisis');
+  if (!pitch || !teamSel || !pick) return;
+
+  pitch.querySelectorAll('.pitch-slot').forEach(el => el.remove());
+
+  PITCH_POS.forEach(p => {
+    const el = document.createElement('div');
+    el.className = 'pitch-slot';
+    el.dataset.pos = p.id;
+    el.style.left = p.x + '%';
+    el.style.top = p.y + '%';
+    el.textContent = p.label;
+    el.title = p.label;
+    pitch.appendChild(el);
+  });
+
+  const teams = Object.keys(CANCHA_SQUADS).sort((a,b)=>paisPlain(a).localeCompare(paisPlain(b),'es'));
+  teamSel.innerHTML = '<option value="">Elegí selección…</option>' +
+    teams.map(t => `<option value="${t}">${PAISES[t]?.code||''} ${paisPlain(t)}</option>`).join('');
+
+  let activeSlot = null;
+  let lineup = {};
+
+  const shortName = (name) => {
+    const parts = name.split(' ');
+    return parts.length > 1 ? parts[parts.length - 1] : name;
+  };
+
+  const updateAnalisis = () => {
+    const box = document.getElementById('canchaAnalisis');
+    if (!box) return;
+    const filled = Object.keys(lineup).length;
+    const team = teamSel.value;
+    const need = PITCH_POS.length; // 11
+
+    if (!team) {
+      box.hidden = true;
+      box.innerHTML = '';
+      return;
+    }
+
+    if (filled < need) {
+      box.hidden = false;
+      box.innerHTML = '<h4>📋 Tu XI · ' + paisPlain(team) + '</h4>' +
+        '<p>Jugadores colocados: <strong>' + filled + ' / ' + need + '</strong>. Completá las ' + (need - filled) + ' posiciones que faltan para ver el análisis de si ganaría el Mundial.</p>';
+      return;
+    }
+
+    const stage = getStage(team);
+    const meta = TEAM_META[team] || {};
+    let power = null;
+    try { if (typeof teamPower === 'function') power = teamPower(team); } catch (e) {}
+    const names = Object.values(lineup);
+
+    let chance = 'medias';
+    let chanceTxt = 'competir bien en grupos y pelear un cruce';
+    if (stage === 'Campeón' || stage === 'Subcampeón') {
+      chance = 'muy altas';
+      chanceTxt = 'pelear el título hasta el final';
+    } else if (stage === '3er puesto' || stage === '4º puesto' || stage === 'Cuartos' || stage === 'Semifinal') {
+      chance = 'altas';
+      chanceTxt = 'llegar lejos en eliminatorias';
+    } else if (stage === 'Octavos' || stage === 'Dieciseisavos') {
+      chance = 'medias-altas';
+      chanceTxt = 'clasificar de grupos y pelear dieciseisavos/octavos';
+    } else {
+      chance = 'ajustadas';
+      chanceTxt = 'luchar cada punto en la fase de grupos';
+    }
+
+    const xi = names.join(', ');
+    box.hidden = false;
+    box.innerHTML = '<h4>📋 Análisis de tu XI — ' + paisPlain(team) + '</h4>' +
+      '<p><strong>Alineación completa (11/11).</strong> ' + xi + '</p>' +
+      '<p><strong>Entrenador:</strong> ' + (meta.coach || '—') + ' · <strong>Confederación:</strong> ' + (meta.conf || '—') + '</p>' +
+      '<p><strong>Nivel en el Mundial 2026:</strong> ' + stage +
+        (power ? (' · Poder ' + power.power + '/100 · ' + power.wins + ' victorias · DG ' + (power.gd > 0 ? '+' : '') + power.gd) : '') + '.</p>' +
+      '<p><strong>¿Ganaría el Mundial con este equipo?</strong> Las chances son <strong>' + chance + '</strong>: este XI está armado para <strong>' + chanceTxt + '</strong>.</p>' +
+      '<p><strong>Lectura táctica:</strong> Con el once definido, el equipo busca equilibrio entre defensa y ataque. ' + (meta.note || 'El resultado dependerá de los partidos clave.') + '</p>' +
+      '<p style="font-size:0.8rem;opacity:0.9">Basado en el rendimiento real de ' + paisPlain(team) + ' en el Mundial 2026 y en los jugadores que ubicaste.</p>';
+  };
+
+  const renderSlots = () => {
+    pitch.querySelectorAll('.pitch-slot').forEach(el => {
+      const name = lineup[el.dataset.pos];
+      if (name) {
+        el.classList.add('filled');
+        el.textContent = shortName(name);
+        el.title = name;
+      } else {
+        el.classList.remove('filled');
+        const pos = PITCH_POS.find(p => p.id === el.dataset.pos);
+        el.textContent = pos ? pos.label : '';
+        el.title = pos ? pos.label : '';
+      }
+      el.classList.toggle('active', el.dataset.pos === activeSlot);
+    });
+    updateAnalisis();
+  };
+
+  const assignPlayer = (posId, playerName) => {
+    Object.keys(lineup).forEach(k => { if (lineup[k] === playerName) delete lineup[k]; });
+    lineup[posId] = playerName;
+    activeSlot = null;
+    renderSlots();
+    renderChips();
+  };
+
+  const renderChips = () => {
+    const team = teamSel.value;
+    pick.innerHTML = '';
+    if (!team) {
+      hint.textContent = 'Primero elegí una selección';
+      return;
+    }
+    const used = new Set(Object.values(lineup));
+    const squad = CANCHA_SQUADS[team] || [];
+    hint.textContent = 'Arrastrá o tocá: posición + jugador · Con 11 sale el análisis';
+
+    squad.forEach(name => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'player-chip' + (used.has(name) ? ' used' : '');
+      btn.dataset.player = name;
+      btn.textContent = name;
+      btn.draggable = !used.has(name);
+
+      btn.addEventListener('dragstart', (e) => {
+        if (used.has(name)) { e.preventDefault(); return; }
+        e.dataTransfer.setData('text/plain', name);
+        e.dataTransfer.effectAllowed = 'move';
+        btn.classList.add('dragging');
+      });
+      btn.addEventListener('dragend', () => btn.classList.remove('dragging'));
+
+      if (!used.has(name)) {
+        btn.onclick = () => {
+          if (!activeSlot) {
+            hint.textContent = 'Tocá una posición en la cancha o arrastrá el jugador';
+            return;
+          }
+          assignPlayer(activeSlot, name);
+        };
+      }
+      pick.appendChild(btn);
+    });
+  };
+
+  pitch.querySelectorAll('.pitch-slot').forEach(el => {
+    el.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      el.classList.add('drag-over');
+    });
+    el.addEventListener('dragleave', () => el.classList.remove('drag-over'));
+    el.addEventListener('drop', (e) => {
+      e.preventDefault();
+      el.classList.remove('drag-over');
+      const playerName = e.dataTransfer.getData('text/plain');
+      if (!playerName || !teamSel.value) return;
+      assignPlayer(el.dataset.pos, playerName);
+    });
+    el.onclick = () => {
+      if (!teamSel.value) {
+        hint.textContent = 'Primero elegí una selección';
+        return;
+      }
+      activeSlot = el.dataset.pos;
+      renderSlots();
+      renderChips();
+    };
+    el.addEventListener('dragstart', (e) => {
+      if (!lineup[el.dataset.pos]) { e.preventDefault(); return; }
+      e.dataTransfer.setData('text/plain', lineup[el.dataset.pos]);
+    });
+  });
+
+  teamSel.onchange = () => {
+    lineup = {};
+    activeSlot = null;
+    renderSlots();
+    renderChips();
+  };
+
+  const clearBtn = document.getElementById('canchaClear');
+  if (clearBtn) clearBtn.onclick = () => {
+    lineup = {};
+    activeSlot = null;
+    renderSlots();
+    renderChips();
+  };
+}
+
+
+const PANEL_TITLES = {
+  inicio: '¡INICIO!',
+  tablas: '¡TABLAS!',
+  partidos: '¡PARTIDOS!',
+  arbol: '¡ÁRBOL!',
+  stats: '¡STATS!',
+  selecciones: '¡SELECCIONES!',
+  estrellas: '¡ESTRELLAS!',
+  comparador: '¡COMPARADOR!',
+  cancha: '¡MI CANCHA!',
+  sedes: '¡SEDES!'
+};
+
+function golTransition(name, done) {
+  let overlay = document.getElementById('golOverlay');
+  if (!overlay) {
+    overlay = document.createElement('div');
+    overlay.id = 'golOverlay';
+    overlay.className = 'gol-overlay';
+    overlay.innerHTML = '<div class="gol-banner"></div>';
+    document.body.appendChild(overlay);
+  }
+  const banner = overlay.querySelector('.gol-banner');
+  banner.textContent = PANEL_TITLES[name] || ('¡' + name.toUpperCase() + '!');
+  overlay.classList.remove('out');
+  overlay.classList.add('on');
+  setTimeout(() => {
+    if (done) done();
+    overlay.classList.add('out');
+    setTimeout(() => {
+      overlay.classList.remove('on', 'out');
+    }, 350);
+  }, 550);
+}
+
+function boot() {
+  allMatches = EMBEDDED_MATCHES;
+  const stM = document.getElementById('stM');
+  if (stM) {
+    stM.textContent = allMatches.length;
+    const stG = document.getElementById('stG');
+    const stGr = document.getElementById('stGr');
+    const stT = document.getElementById('stT');
+    if (stG) stG.textContent = allMatches.reduce((a,m) => {
+      const sc = m.score || {};
+      if (sc.et) return a + (sc.et[0]||0) + (sc.et[1]||0);
+      return a + (sc.ft?.[0]||0) + (sc.ft?.[1]||0);
+    }, 0);
+    if (stGr) stGr.textContent = new Set(allMatches.map(m => m.group).filter(Boolean)).size;
+    if (stT) stT.textContent = new Set(allMatches.flatMap(m => [m.team1, m.team2])).size;
+  }
+
+  renderTablas();
+  renderPartidos();
+  renderBracket();
+  renderStats();
+  renderTeams();
+  loadWeather();
+  renderVenues();
+  setupComparator();
+  setupCancha();
+
+  document.querySelectorAll('#phasePills .pill').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#phasePills .pill').forEach(b => b.classList.remove('on'));
+      btn.classList.add('on');
+      phase = btn.dataset.p;
+      groupFilter = '';
+      renderPartidos();
+    });
+  });
+
+  function showPanel(name) {
+    golTransition(name, () => {
+      document.querySelectorAll('.panel').forEach(p => p.classList.remove('on'));
+      const el = document.getElementById('panel-' + name);
+      if (el) el.classList.add('on');
+      document.querySelectorAll('.nav-links a').forEach(a => {
+        a.classList.toggle('active', a.dataset.panel === name);
+      });
+      document.getElementById('navLinks').classList.remove('open');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  document.getElementById('navToggle').onclick = () => document.getElementById('navLinks').classList.toggle('open');
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      showPanel(a.dataset.panel);
+    });
+  });
+
+  // Estrellas: clic abre info debajo
+  document.getElementById('panel-estrellas')?.addEventListener('click', function(e) {
+    const card = e.target.closest('[data-star]');
+    if (!card || !this.contains(card)) return;
+    const wasOpen = card.classList.contains('open');
+    this.querySelectorAll('[data-star].open').forEach(el => el.classList.remove('open'));
+    if (!wasOpen) {
+      card.classList.add('open');
+      setTimeout(() => card.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
+    }
+  });
+
+  document.getElementById('teamSearch').addEventListener('input', e => {
+    renderTeams(e.target.value);
+  });
+}
+
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+else boot();
+</script>
+</body>
+</html>
